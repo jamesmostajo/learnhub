@@ -1,12 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Files</h2>
+        <button id="open-folder">Open Folder</button>
+      </div>
+      <ul class="file-list">
+      </ul>
+    </div>
 
-  </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </body>
+    <!-- Main Pane -->
+    <div class="main-pane">
+      <div class="file-view">
+        <div class="file-header">
+          <h1 class="file-name"></h1>
+        </div>
+        <div class="file-content">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
