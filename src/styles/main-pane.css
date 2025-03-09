@@ -1,0 +1,21 @@
+.file-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 10px;
+    overflow-x: auto;
+    height: 50px;
+    line-height: 30px;
+  }
+  
+  #file-content {
+    background-color: #252525;
+    border-radius: 8px;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 90vh;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10pt;
+  }
+  

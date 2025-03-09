@@ -1,0 +1,59 @@
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #open-folder {
+    background-color: rgb(30, 136, 218);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  #open-folder:hover {
+    background-color: rgb(4, 93, 161);
+  }
+  
+  .sidebar-header h2 {
+    font-size: 18px;
+  }
+  
+  .file-list {
+    height: 95vh;
+    overflow-y: auto;
+  }
+  
+  /* File list reset and nested list indent */
+  .file-list,
+  .file-list li {
+    margin: 0;
+    list-style: none;
+  }
+  
+  .file-list ul {
+    padding-left: 10px;
+  }
+  
+  /* Clickable areas for folder headers and files */
+  .clickable-container,
+  .file-item {
+    display: block;
+    padding: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .clickable-container:hover,
+  .file-item:hover {
+    background-color: #444;
+  }
+  
+  /* Extra indent for nested items */
+  .file-list ul li > .clickable-container,
+  .file-list ul li > .file-item {
+    padding-left: 5px;
+  }
+  

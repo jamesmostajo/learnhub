@@ -16,43 +16,65 @@ export function loadFolderContents(directoryPath, parentElement) {
 
         const li = document.createElement('li');
 
-        // If it's a directory, add an indicator span before the file name
         if (stats.isDirectory()) {
-          li.style.cursor = 'pointer';
+          li.style.cursor = 'default'; // the li itself won't have the hover
 
+          // Create a full-width clickable container for the folder header
+          const clickableContainer = document.createElement('div');
+          clickableContainer.classList.add('clickable-container');
+          clickableContainer.style.display = 'block';
+          clickableContainer.style.width = '100%';
+          clickableContainer.style.boxSizing = 'border-box';
+          clickableContainer.style.cursor = 'pointer';
+
+          // Create the indicator span
           const indicator = document.createElement('span');
           indicator.classList.add('folder-indicator');
-          indicator.textContent = '>'; // Collapsed state indicator
-          li.appendChild(indicator);
+          indicator.textContent = '>'; // initial collapsed state
+          indicator.style.marginRight = '5px';
 
-          // Append the folder name after the indicator
-          const textNode = document.createTextNode(' ' + file);
-          li.appendChild(textNode);
+          // Create the folder name span
+          const folderNameSpan = document.createElement('span');
+          folderNameSpan.textContent = file;
 
-          // Add click event for toggling expansion/collapse
-          li.addEventListener('click', function (e) {
-            // Prevent clicks from propagating to parent items
+          // Append both to the clickable container
+          clickableContainer.appendChild(indicator);
+          clickableContainer.appendChild(folderNameSpan);
+
+          // Attach click event to the clickable container
+          clickableContainer.addEventListener('click', function (e) {
             e.stopPropagation();
-
-            const nestedUl = this.querySelector('ul');
+            const nestedUl = li.querySelector('ul');
             if (nestedUl) {
-              // Collapse folder: remove nested <ul> and update indicator
-              this.removeChild(nestedUl);
+              li.removeChild(nestedUl);
               indicator.textContent = '>';
             } else {
-              // Expand folder: create nested <ul> and update indicator
               const newUl = document.createElement('ul');
-              this.appendChild(newUl);
+              li.appendChild(newUl);
               loadFolderContents(fullPath, newUl);
               indicator.textContent = 'v';
             }
           });
 
-        } else {
-          // For files, simply set the text content
-          li.textContent = file;
+          // Append the clickable container to the li
+          li.appendChild(clickableContainer);
         }
-
+        else {
+          li.classList.add('file-item');
+          li.style.cursor = 'pointer';
+          li.textContent = file;
+          li.addEventListener('click', function (e) {
+            e.stopPropagation();
+            fs.readFile(fullPath, 'utf8', (err, data) => {
+              if (err) {
+                console.error('Error reading file:', err);
+                return;
+              }
+              document.getElementById('file-content').textContent = data;
+              document.getElementById('file-name').textContent = path.basename(fullPath);
+            });
+          });
+        }
         parentElement.appendChild(li);
       });
     });

@@ -26,7 +26,10 @@
  * ```
  */
 
-import './index.css';
+import './styles/base.css';
+import './styles/layout.css';
+import './styles/sidebar.css';
+import './styles/main-pane.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
@@ -36,6 +39,4 @@ const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
 
 selectFolderButton.addEventListener('click', () => openDirectory(fileList));
-
-
 
