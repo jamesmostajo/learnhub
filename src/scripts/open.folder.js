@@ -1,4 +1,4 @@
-import { loadFolderContents } from './display.file';
+import { loadFolderContents } from './open.file';
 
 const { dialog } = require('@electron/remote');
 

@@ -33,10 +33,13 @@ import './styles/main-pane.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-import { openDirectory } from './open.folder';
+import { openDirectory } from './scripts/open.folder';
+import { saveData } from './scripts/display.file';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
 
 selectFolderButton.addEventListener('click', () => openDirectory(fileList));
 
+const saveButton = document.getElementById('save-button');
+saveButton.addEventListener('click', saveData);
