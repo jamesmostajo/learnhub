@@ -18,6 +18,7 @@ const createWindow = () => {
       contextIsolation: false,
       enableRemoteModule: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      webviewTag: true,
     },
   });
 
@@ -55,3 +56,18 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+const { dialog, ipcMain } = require("electron");
+const fs = require("fs");
+
+ipcMain.handle("open-folder", async () => {
+    const result = await dialog.showOpenDialog({
+        properties: ["openDirectory"]
+    });
+
+    if (!result.canceled && result.filePaths.length > 0) {
+        return result.filePaths[0]; // Return selected folder path
+    } else {
+        return null;
+    }
+});

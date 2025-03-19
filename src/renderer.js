@@ -35,6 +35,7 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
+import { splitScreen } from './scripts/split.screen';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -43,3 +44,6 @@ selectFolderButton.addEventListener('click', () => openDirectory(fileList));
 
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', saveData);
+
+const splitButton = document.getElementById('split-screen');
+splitScreen(splitButton);
