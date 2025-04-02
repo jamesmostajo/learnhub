@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Application</title>
 </head>
 <body>
@@ -12,11 +12,11 @@
       <div class="sidebar-header">
         <h2>Files</h2>
         <button id="open-folder">Open Folder</button>
+        <button id="show-flashcards">Flashcards</button>
       </div>
-      <ul class="file-list">
-      </ul>
+      <ul class="file-list"></ul>
     </div>
-
+  
     <!-- Main Pane -->
     <div class="main-pane">
       <div class="file-view">
@@ -24,27 +24,27 @@
           <h1 id="file-name"></h1>
           <button id="save-button" hidden>Save</button>
         </div>
-          <pre id="file-content"></pre>
+        <pre id="file-content"></pre>
+      </div>
+  
+      <!-- Flash Cards -->
+      <div id="flashcard-container" style="display: none;">
+        <div id="flashcard">
+          <div id="flashcard-front" class="card-face">Question</div>
+          <div id="flashcard-back" class="card-face" style="display:none;">Answer</div>
         </div>
-
-        <!-- Flash Cards -->
-        <div id="flashcard-container" style="display: none;">
-          <div id="flashcard">
-            <div id="flashcard-front" class="card-face">Question</div>
-            <div id="flashcard-back" class="card-face" style="display:none;">Answer</div>
-          </div>
-        
-          <div id="flashcard-controls">
-            <button id="prev-card">Previous</button>
-            <button id="flip-card">Flip</button>
-            <button id="next-card">Next</button>
-          </div>
-        
-          <div id="flashcard-progress">Card 1 of X</div>
+  
+        <div id="flashcard-controls">
+          <button id="prev-card">Previous</button>
+          <button id="flip-card">Flip</button>
+          <button id="next-card">Next</button>
         </div>
-        
+  
+        <div id="flashcard-progress">Card 1 of X</div>
       </div>
     </div>
   </div>
+  
+  <script src="./scripts/flashcard.js"></script>
 </body>
 </html>
