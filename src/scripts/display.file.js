@@ -1,4 +1,4 @@
-import { text } from 'stream/consumers';
+import { createTab, switchToTab } from './routes.js';
 
 const fs = require('fs');
 const path = require('path');
@@ -8,17 +8,14 @@ const allowedExtensions = ['.txt', '.md', '.js', '.py', '.java', '.json', '.html
 
 // This function handles a file click event. It expects the event object and the full file path.
 export function handleFileClick(e, fullPath) {
-  e.stopPropagation(); // Prevent the event from bubbling up
+  e.stopPropagation();
 
   const ext = path.extname(fullPath).toLowerCase();
   const fileContentEl = document.getElementById('file-content');
-  const fileNameEl = document.getElementById('file-name');
 
   if (!allowedExtensions.includes(ext)) {
     fileContentEl.textContent = 'Error: Unsupported file type.';
-    fileNameEl.textContent = path.basename(fullPath);
-    const saveButton = document.getElementById('save-button');
-    saveButton.setAttribute('hidden', 'hidden');
+    document.getElementById('save-button')?.setAttribute('hidden', 'hidden');
     return;
   }
 
@@ -28,34 +25,14 @@ export function handleFileClick(e, fullPath) {
       fileContentEl.textContent = 'Error reading file.';
       return;
     }
-    displayEditableFileContent(fullPath, data);
+
+    createTab(fullPath, data);
+    switchToTab(fullPath);
+    const saveButton = document.getElementById('save-button');
+    saveButton.removeAttribute('hidden');
   });
 }
 
-// Function to display an editable text file
-function displayEditableFileContent(fullPath, data) {
-  const fileNameEl = document.getElementById('file-name');
-  fileNameEl.textContent = path.basename(fullPath);
-
-
-  // Get the file content container
-  const fileContentContainer = document.getElementById('file-content');
-  fileContentContainer.dataset.path = fullPath;
-
-  // Clear previous content
-  fileContentContainer.innerHTML = '';
-
-  // Create a textarea for editing
-  const textarea = document.createElement('textarea');
-  textarea.id = 'text-edit-area';
-  textarea.setAttribute('spellcheck', 'false');
-  textarea.value = data;
-  fileContentContainer.appendChild(textarea);
-
-  // show save button
-  const saveButton = document.getElementById('save-button');
-  saveButton.removeAttribute('hidden');
-}
 
 export function saveData() {
   const fullPath = (document.getElementById('file-content')).dataset.path;
