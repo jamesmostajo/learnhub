@@ -31,7 +31,9 @@ export function createTab(fullPath, initialContent) {
     fileTab.appendChild(nameSpan);
     fileTab.appendChild(closeBtn);
     fileTabSection.appendChild(fileTab);
-
+    
+    markTabAsActive(fileTab);
+    
     tabState[fullPath] = {
       content: initialContent
     };
