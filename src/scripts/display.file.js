@@ -3,10 +3,9 @@ import { createTab, switchToTab } from './routes.js';
 const fs = require('fs');
 const path = require('path');
 
-// List of allowed text-based file extensions
-const allowedExtensions = ['.txt', '.md', '.js', '.py', '.java', '.json', '.html', '.css', '.gd'];
+const allowedExtensions = ['.txt', '.md', '.js', '.py', '.java', '.json', '.html', '.css', '.gd', '.c', '.cpp'];
 
-// This function handles a file click event. It expects the event object and the full file path.
+
 export function handleFileClick(e, fullPath) {
   e.stopPropagation();
 
