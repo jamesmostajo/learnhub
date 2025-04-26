@@ -60,20 +60,12 @@ const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', saveData);
 
 const showFlashcardsBtn = document.getElementById('flash-cards-btn');
-
-showFlashcardsBtn.addEventListener('click', () => {
-    //window.alert("You clicked me");
-    displayFlashcards();
-});
+showFlashcardsBtn.addEventListener('click', displayFlashcards);
 
 const showQuizBtn = document.getElementById('quiz-btn');
+showQuizBtn.addEventListener('click', displayQuiz);
 
-showQuizBtn.addEventListener('click', () => {
-    //window.alert("You clicked me");
-    displayQuiz();
-});
-
-
-const homeBtn = document.getElementById('home-btn');
+const timerBtn = document.getElementById('timer-btn');
+timerBtn.addEventListener('click', displayTimer);
 
 initAmbientSound();

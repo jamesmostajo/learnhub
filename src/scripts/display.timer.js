@@ -1,8 +1,8 @@
-import { createTab, switchToTab } from './routes.js';
+import { createTab, switchToTab, tabState } from './routes.js';
 
 export function displayTimer() {
-  const window = document.getElementById('window');
-  window.innerHTML = `
+  const timerPath = 'timer://Timer';
+  const timerHTML = `
     <div id="timer-container">
       <h3>Study Timer</h3>
       <div id="timerDisplay">25:00</div>
@@ -51,5 +51,25 @@ export function displayTimer() {
         </div>
       </div>
     </div>
-  `
+  `;
+
+  if (!tabState[timerPath]) {
+    createTab(timerPath, timerHTML);
+  }
+
+  switchToTab(timerPath);
+
+  const saveButton = document.getElementById('save-button');
+  if (saveButton) {
+    saveButton.setAttribute('hidden', 'hidden');
+  }
+}
+
+export function renderTimerTab(fullPath) {
+  const windowEl = document.getElementById('file-content');
+  if (!windowEl) return;
+
+  const content = tabState[fullPath]?.content || '';
+
+  windowEl.innerHTML = content;
 }
