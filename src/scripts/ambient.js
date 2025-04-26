@@ -49,8 +49,4 @@ export function initAmbientSound() {
       currentAudio.currentTime = 0;
     }
   });
-
-  toggleBtn.addEventListener('click', () => {
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
-  });
 }

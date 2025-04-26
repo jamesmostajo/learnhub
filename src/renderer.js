@@ -48,8 +48,7 @@ import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
 import { displayTimer } from './scripts/display.timer';
 import { displayQuiz } from './scripts/display.quiz.js';
-
-import { initAmbientSound } from './scripts/ambient';
+import { displayAmbient } from './scripts/display.ambient.js';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -63,9 +62,11 @@ const showFlashcardsBtn = document.getElementById('flash-cards-btn');
 showFlashcardsBtn.addEventListener('click', displayFlashcards);
 
 const showQuizBtn = document.getElementById('quiz-btn');
+
 showQuizBtn.addEventListener('click', displayQuiz);
 
 const timerBtn = document.getElementById('timer-btn');
 timerBtn.addEventListener('click', displayTimer);
 
-initAmbientSound();
+const showAmbientBtn = document.getElementById('toggle-ambient');
+showAmbientBtn.addEventListener('click', displayAmbient);
