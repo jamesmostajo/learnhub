@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Files</h2>
+        <button id="open-folder">Open Folder</button>
+        <button id="toggle-timeblocking">Time Blocking</button>
+      </div>
+      <ul class="file-list"></ul>
+    </div>
+
+    <!-- Main Pane -->
+    <div class="main-pane">
+      <div class="file-view">
+        <div class="file-header">
+          <h1 id="file-name"></h1>
+          <button id="save-button" hidden>Save</button>
+        </div>
+        <pre id="file-content"></pre>
+      </div>
+
+      <!-- 🕒 Study Timer (Time Blocking UI) -->
+      <div id="timer-container">
+        <h3>Study Timer</h3>
+        <p id="timerDisplay">25:00</p>
+        <button id="startTimer">Start</button>
+        <button id="stopTimer">Stop</button>
+        <button id="open-settings">⚙ Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🛠 Timer Settings Modal -->
+  <div id="timer-settings" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Timer Settings</h3>
+
+      <label for="pomodoro-time">Pomodoro (minutes:seconds)</label>
+      <input type="text" id="pomodoro-time" value="25:00">
+
+      <label for="short-break">Short Break</label>
+      <input type="text" id="short-break" value="5:00">
+
+      <label for="long-break">Long Break</label>
+      <input type="text" id="long-break" value="15:00">
+
+      <label for="auto-start-breaks">Auto Start Breaks</label>
+      <input type="checkbox" id="auto-start-breaks">
+
+      <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
+      <input type="checkbox" id="auto-start-pomodoros">
+
+      <label for="long-break-interval">Long Break Interval</label>
+      <input type="number" id="long-break-interval" value="4">
+
+      <button id="save-settings">Save</button>
+    </div>
+  </div>
+</body>
+</html>
