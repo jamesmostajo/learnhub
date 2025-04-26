@@ -1,0 +1,37 @@
+#ambient-container {
+  background-color: #252525;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+#ambient-container h2 {
+  margin-bottom: 10px;
+}
+
+#sound-select {
+  background-color: #333;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#play-sound, #stop-sound {
+  margin: 8px 5px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(30, 136, 218);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#play-sound:hover, #stop-sound:hover {
+  background-color: rgb(4, 93, 161);
+}
