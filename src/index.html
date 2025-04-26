@@ -15,6 +15,7 @@
         <button id="home-btn">Home</button>
         <button id="flash-cards-btn">Flash Cards</button>
         <button id="quiz-btn">Quiz</button>
+        <button id="toggle-ambient">Ambient Sound</button>
       </div>
       <ul class="file-list"></ul>
     </div>
@@ -31,34 +32,6 @@
           </div>
         </div>
       </div> <!-- End of File View -->
-    </div> <!-- End of Main Pane -->
-
-  </div> <!-- End of Container -->
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application</title>
-</head>
-<body>
-  <div class="container">
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <h2>Files</h2>
-      </div>
-      <button id="open-folder">Open Folder</button>
-      <button id="toggle-ambient">Ambient Sound</button>
-      <ul class="file-list"></ul>
-    </div>
-
-    <div class="main-pane">
-      <div class="file-view">
-        <div class="file-header">
-          <h1 id="file-name"></h1>
-          <button id="save-button" hidden>Save</button>
-        </div>
-        <pre id="file-content"></pre>
-      </div>
-
       <div id="ambient-container" style="display: none;">
         <h2>Ambient Sound</h2>
         <label for="sound-select">Choose a sound:</label>
@@ -72,7 +45,8 @@
         <button id="play-sound">Play</button>
         <button id="stop-sound">Stop</button>
       </div>
-    </div>
-  </div>
+    </div> <!-- End of Main Pane -->
+
+  </div> <!-- End of Container -->
 </body>
 </html>

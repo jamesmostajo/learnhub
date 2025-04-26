@@ -6,6 +6,13 @@ const soundMap = {
   nature: require('../assets/sounds/nature.mp3')
 };
 
+const path = require('path');
+
+// Print the resolved paths
+console.log('Rain Sound:', soundMap.rain);
+console.log('Cafe Sound:', soundMap.cafe);
+console.log('Nature Sound:', soundMap.nature);
+
 export function initAmbientSound() {
   const playBtn = document.getElementById('play-sound');
   const stopBtn = document.getElementById('stop-sound');
@@ -25,7 +32,12 @@ export function initAmbientSound() {
     if (currentAudio && !currentAudio.paused) {
       currentAudio.pause();
     }
-    currentAudio = new Audio(soundMap[selected]);
+
+    // Ensure the correct path is being passed to the Audio constructor
+    const audioSource = soundMap[selected];
+    console.log('Selected Audio Source:', audioSource); // Log for debugging
+
+    currentAudio = new Audio(audioSource);
     currentAudio.loop = true;
     currentAudio.volume = 0.5;
     currentAudio.play();
