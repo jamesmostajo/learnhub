@@ -1,9 +1,9 @@
 let currentAudio = null;
 
 const soundMap = {
-  rain: require('../assets/sounds/rain.mp3'),
-  cafe: require('../assets/sounds/cafe.mp3'),
-  nature: require('../assets/sounds/nature.mp3')
+  rain: require('../assets/sounds/rain.mp3').default, // Extract the default export
+  cafe: require('../assets/sounds/cafe.mp3').default,
+  nature: require('../assets/sounds/nature.mp3').default,
 };
 
 const path = require('path');
