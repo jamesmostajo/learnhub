@@ -16,20 +16,16 @@ module.exports = [
       },
     },
   },
-  // Put your webpack loader rules in this array.  This is where you would put
-  // your ts-loader configuration for instance:
-  /**
-   * Typescript Example:
-   *
-   * {
-   *   test: /\.tsx?$/,
-   *   exclude: /(node_modules|.webpack)/,
-   *   loaders: [{
-   *     loader: 'ts-loader',
-   *     options: {
-   *       transpileOnly: true
-   *     }
-   *   }]
-   * }
-   */
+  // Add rule for .mp3 files
+  {
+    test: /\.mp3$/,
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[hash].[ext]',
+        outputPath: 'assets/sounds/', // Optional: change the output folder
+      },
+    },
+  },
+  // Other loader rules (for example, TypeScript loader) can go here...
 ];

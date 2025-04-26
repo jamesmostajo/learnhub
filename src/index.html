@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LearnHub</title>
 </head>
 <body>
-  <div class="container">
+  <div class="container"> <!-- Start of Container -->
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
         <h2>Files</h2>
         <button id="open-folder">Open Folder</button>
-        <button id="another-button">Settings</button>
+        <button id="home-btn">Home</button>
+        <button id="flash-cards-btn">Flash Cards</button>
+        <button id="quiz-btn">Quiz</button>
       </div>
-      <ul class="file-list">
-      </ul>
+      <ul class="file-list"></ul>
     </div>
 
     <!-- Main Pane -->
-    <div class="main-pane">
-      <div class="file-view">
+    <div class="main-pane"> <!-- Start of Main Pane -->
+      <div class="file-view"> <!-- Start of File View -->
         <div class="file-header">
           <div id="file-tabs"></div>
           <button id="save-button" hidden>Save</button>
@@ -29,6 +30,47 @@
             <pre id="file-content"></pre>
           </div>
         </div>
+      </div> <!-- End of File View -->
+    </div> <!-- End of Main Pane -->
+
+  </div> <!-- End of Container -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Files</h2>
+      </div>
+      <button id="open-folder">Open Folder</button>
+      <button id="toggle-ambient">Ambient Sound</button>
+      <ul class="file-list"></ul>
+    </div>
+
+    <div class="main-pane">
+      <div class="file-view">
+        <div class="file-header">
+          <h1 id="file-name"></h1>
+          <button id="save-button" hidden>Save</button>
+        </div>
+        <pre id="file-content"></pre>
+      </div>
+
+      <div id="ambient-container" style="display: none;">
+        <h2>Ambient Sound</h2>
+        <label for="sound-select">Choose a sound:</label>
+        <select id="sound-select">
+          <option value="none">None</option>
+          <option value="rain">Rain</option>
+          <option value="cafe">Café</option>
+          <option value="nature">Nature</option>
+        </select>
+        <br><br>
+        <button id="play-sound">Play</button>
+        <button id="stop-sound">Stop</button>
       </div>
     </div>
   </div>
