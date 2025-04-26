@@ -1,0 +1,82 @@
+#timer-container{
+  width: 40vw;
+}
+
+#timerDisplay{
+  background-color: rgb(22, 22, 22);
+  font-size: 50pt;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+#start-stop{
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#start-stop button{
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: medium;
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+}
+
+#start-stop button:hover{
+  background-color:  rgb(4, 93, 161);;
+}
+
+#pomodoro-labels{
+  display: flex;
+  justify-content: space-between;
+  width: 30vw;
+}
+
+.pomodoro-inputs{
+  display: flex;
+  flex-direction: column;
+}
+.pomodoro-inputs input[type="text"] {
+  width: 80px;
+}
+
+#other-options {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.pomodoro-other-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pomodoro-other-inputs input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4CAF50;
+}
+
+.pomodoro-other-inputs input[type="number"] {
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+
+#save-settings{
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: small;
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+}
+

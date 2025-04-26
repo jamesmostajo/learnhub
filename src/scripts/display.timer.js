@@ -1,0 +1,55 @@
+import { createTab, switchToTab } from './routes.js';
+
+export function displayTimer() {
+  const window = document.getElementById('window');
+  window.innerHTML = `
+    <div id="timer-container">
+      <h3>Study Timer</h3>
+      <div id="timerDisplay">25:00</div>
+      <div id="start-stop">
+        <button id="startTimer">Start</button>
+        <button id="stopTimer">Stop</button>
+      </div>
+    </div>
+
+    <div id="timer-settings">
+        <h3>Timer Settings (minutes : seconds)</h3>
+
+        <div id="pomodoro-labels">
+          <div class="pomodoro-inputs">
+            <label for="pomodoro-time">Pomodoro</label>        
+            <input type="text" id="pomodoro-time" value="25:00">
+          </div>
+          
+          <div class="pomodoro-inputs">
+            <label for="short-break">Short Break</label>
+            <input type="text" id="short-break" value="5:00">
+          </div>
+          
+          <div class="pomodoro-inputs">
+            <label for="long-break">Long Break</label>
+            <input type="text" id="long-break" value="15:00">
+          </div>
+        </div>
+          
+        <div id="other-options">
+          <div class="pomodoro-other-inputs">
+            <label for="auto-start-breaks">Auto Start Breaks</label>
+            <input type="checkbox" id="auto-start-breaks">
+          </div>
+
+          <div class="pomodoro-other-inputs">
+            <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
+            <input type="checkbox" id="auto-start-pomodoros">
+          </div>
+
+          <div class="pomodoro-other-inputs">
+            <label for="long-break-interval">Long Break Interval</label>
+            <input type="number" id="long-break-interval" value="4">
+          </div>
+        <button id="save-settings">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  `
+}

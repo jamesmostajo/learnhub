@@ -31,12 +31,13 @@ import './styles/layout.css';
 import './styles/sidebar.css';
 import './styles/main-pane.css';
 import './styles/tabs.css';
+import './styles/timer.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
-import { displayHTML } from './scripts/display.html';
+import { displayTimer } from './scripts/display.timer';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -47,4 +48,4 @@ const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', saveData);
 
 const settingsButton = document.getElementById('another-button');
-settingsButton.addEventListener('click', displayHTML);
+settingsButton.addEventListener('click', displayTimer);
