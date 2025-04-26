@@ -9,52 +9,41 @@ export function createTab(fullPath, initialContent) {
     const fileTab = document.createElement('div');
     fileTab.classList.add('tab');
     fileTab.dataset.path = fullPath;
-    
+
     const nameSpan = document.createElement('span');
     nameSpan.textContent = path.basename(fullPath);
     nameSpan.classList.add('tab-name');
-    
+
     const closeBtn = document.createElement('button');
     closeBtn.textContent = '✕';
     closeBtn.classList.add('close-btn');
-    
+
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       closeTab(fullPath, fileTab);
     });
-    
+
     fileTab.addEventListener('click', () => {
       switchToTab(fullPath);
       markTabAsActive(fileTab);
     });
-    
+
     fileTab.appendChild(nameSpan);
     fileTab.appendChild(closeBtn);
     fileTabSection.appendChild(fileTab);
-    
+
     markTabAsActive(fileTab);
-    
+
     tabState[fullPath] = {
       content: initialContent
     };
   }
 }
 
-
 export function switchToTab(fullPath) {
   saveActiveTabState();
   activeTabPath = fullPath;
   renderTab(fullPath);
-}
-
-export function updateTabContent(fullPath, newContent) {
-  if (tabState[fullPath]) {
-    tabState[fullPath].content = newContent;
-  }
-}
-
-export function getTabContent(fullPath) {
-  return tabState[fullPath]?.content || '';
 }
 
 function saveActiveTabState() {
@@ -96,7 +85,7 @@ function markTabAsActive(tabButton) {
 }
 
 function closeTab(fullPath, tabButton) {
-  deleteTab(fullPath);
+  delete tabState[fullPath];
   tabButton.remove();
 
   const remainingTabs = document.querySelectorAll('#file-tabs .tab');
@@ -111,9 +100,6 @@ function closeTab(fullPath, tabButton) {
   }
 }
 
-export function deleteTab(fullPath) {
-  delete tabState[fullPath];
-}
 
 function showDefaultDisplay() {
   const windowEl = document.getElementById('window');
