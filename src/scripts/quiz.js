@@ -38,27 +38,15 @@ const quizData = [
 
 let currentQuizIndex = 0;
 
-window.addEventListener("DOMContentLoaded", () => {
-  const quizBtn = document.getElementById("show-quiz");
-  const fileView = document.querySelector(".file-view");
+// Exported function instead of window event!
+export function initializeQuizControls() {
+  console.log("initializeQuizControls() loaded");
+
   const quizContainer = document.getElementById("quiz-container");
-
-  if (!quizBtn || !quizContainer) return;
-
-  quizBtn.addEventListener("click", () => {
-    const flashcardContainer = document.getElementById('flashcard-container');
-    const quizContainer = document.getElementById('quiz-container');
-    const fileView = document.querySelector('.file-view');
-  
-    // Hide other views
-    if (flashcardContainer) flashcardContainer.style.display = 'none';
-    if (fileView) fileView.style.display = 'none';
-  
-    // Show quiz
-    quizContainer.style.display = "block";
-    renderQuiz();
-  });
-  
+  if (!quizContainer) {
+    console.error("Quizzes not found.");
+    return;
+  }
 
   document.getElementById("quiz-next").addEventListener("click", () => {
     if (currentQuizIndex < quizData.length - 1) {
@@ -67,23 +55,37 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function renderQuiz() {
-    const quiz = quizData[currentQuizIndex];
-    const questionEl = document.getElementById("quiz-question");
-    const optionsEl = document.getElementById("quiz-options");
+  document.getElementById("quiz-prev").addEventListener("click", () => {
+    if (currentQuizIndex > 0) {
+      currentQuizIndex--;
+      renderQuiz();
+    }
+  });
 
-    questionEl.textContent = quiz.question;
-    optionsEl.innerHTML = "";
+  renderQuiz();
+}
 
-    quiz.options.forEach(option => {
-      const btn = document.createElement("button");
-      btn.textContent = option;
-      btn.style.cssText = "background-color:#007bff;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;";
-      btn.onclick = () => alert(option === quiz.correct ? "✅ Correct!" : "❌ Wrong!");
-      optionsEl.appendChild(btn);
-    });
+function renderQuiz() {
+  const quiz = quizData[currentQuizIndex];
+  const questionEl = document.getElementById("quiz-question");
+  const optionsEl = document.getElementById("quiz-options");
 
-    document.getElementById("quiz-progress").textContent =
-      `Question ${currentQuizIndex + 1} of ${quizData.length}`;
+  if (!questionEl || !optionsEl) {
+    console.error("⚠️ Quiz elements missing in DOM.");
+    return;
   }
-});
+
+  questionEl.textContent = quiz.question;
+  optionsEl.innerHTML = "";
+
+  quiz.options.forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.style.cssText = "background-color:#007bff;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;";
+    btn.onclick = () => alert(option === quiz.correct ? "Correct!" : "Wrong!");
+    optionsEl.appendChild(btn);
+  });
+
+  document.getElementById("quiz-progress").textContent =
+    `Question ${currentQuizIndex + 1} of ${quizData.length}`;
+}

@@ -43,6 +43,7 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 import { displayFlashcards } from './scripts/display.flash-cards';
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
+import { displayQuiz } from './scripts/display.quiz.js';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -59,7 +60,12 @@ showFlashcardsBtn.addEventListener('click', () => {
     displayFlashcards();
     });
 
-
+const showQuizBtn = document.getElementById('quiz-btn');
+  
+showQuizBtn.addEventListener('click', () => {
+    //window.alert("You clicked me");
+    displayQuiz();
+    });
 
 
 const homeBtn = document.getElementById('home-btn');

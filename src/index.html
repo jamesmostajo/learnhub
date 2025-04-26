@@ -4,112 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LearnHub</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #1e1e1e;
-      color: white;
-      display: flex;
-      height: 100vh;
-    }
-
-    .container {
-      display: flex;
-      width: 100%;
-    }
-
-    .sidebar {
-      width: 200px;
-      background: #2d2d2d;
-      color: white;
-      padding: 1em;
-    }
-
-    .sidebar-header {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    }
-
-    .sidebar button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 1rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .sidebar button:hover {
-      background-color: #0056b3;
-    }
-
-    .main-pane {
-      flex: 1;
-      padding: 2em;
-    }
-
-    .file-view {
-      display: block;
-    }
-
-    #flashcard-container {
-      padding: 30px;
-      display: none;
-    }
-
-    #flashcard {
-      background-color: #ffffff;
-      color: #1a1a1a;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      padding: 40px;
-      margin: 0 auto;
-      width: 80%;
-      font-size: 1.5rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .card-face {
-      min-height: 100px;
-      font-weight: bold;
-    }
-
-    #flashcard-controls {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #flashcard-controls button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    #flashcard-controls button:hover {
-      background-color: #0056b3;
-    }
-
-    #flashcard-progress {
-      margin-top: 10px;
-      text-align: center;
-      color: #ffffff;
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container"> <!-- Start of Container -->
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
@@ -117,8 +14,7 @@
         <button id="open-folder">Open Folder</button>
         <button id="home-btn">Home</button>
         <button id="flash-cards-btn">Flash Cards</button>
-        <button id="show-flashcards">Flashcards</button>
-        <button id="show-quiz">Quiz</button>
+        <button id="quiz-btn">Quiz</button>
       </div>
       <ul class="file-list"></ul>
     </div>
@@ -137,23 +33,6 @@
       </div> <!-- End of File View -->
     </div> <!-- End of Main Pane -->
 
-
-        <!-- Quiz Section -->
-        <div id="quiz-container" style="display: none;">
-          <div id="quiz">
-            <h2 id="quiz-question">Question will appear here</h2>
-            <div id="quiz-options" style="margin-bottom: 10px;"></div>
-            <div id="quiz-navigation" style="margin-top: 20px; text-align: center;">
-              <button id="quiz-prev" style="background-color:#6c757d;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;">Previous</button>
-              <button id="quiz-next" style="background-color:#007bff;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;">Next</button>
-            </div>
-            <div id="quiz-progress" style="margin-top: 10px;"></div>
-          </div>
-        </div>
-    
-    </div>
-  </div>
-
-  <script src="./scripts/quiz.js"></script>
+  </div> <!-- End of Container -->
 </body>
 </html>
