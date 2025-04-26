@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * This file will automatically be loaded by webpack and run in the "renderer" context.
  * To learn more about the differences between the "main" and the "renderer" context in
@@ -26,10 +27,13 @@
  * ```
  */
 
+=======
+>>>>>>> 3cf043d7def3e8745a115272eec3bd91f09cca81
 import './styles/base.css';
 import './styles/layout.css';
 import './styles/sidebar.css';
 import './styles/main-pane.css';
+<<<<<<< HEAD
 import './styles/tabs.css';
 import './styles/flashcards.css';
 
@@ -44,6 +48,8 @@ import { displayFlashcards } from './scripts/display.flash-cards';
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
 import { displayQuiz } from './scripts/display.quiz.js';
+
+import { initAmbientSound } from './scripts/ambient';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -70,3 +76,4 @@ showQuizBtn.addEventListener('click', () => {
 
 const homeBtn = document.getElementById('home-btn');
 
+initAmbientSound();
