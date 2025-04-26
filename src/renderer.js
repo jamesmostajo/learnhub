@@ -48,8 +48,7 @@ import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
 import { displayTimer } from './scripts/display.timer';
 import { displayQuiz } from './scripts/display.quiz.js';
-
-import { initAmbientSound } from './scripts/ambient';
+import { displayAmbient } from './scripts/display.ambient.js';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -73,7 +72,9 @@ showQuizBtn.addEventListener('click', () => {
     displayQuiz();
 });
 
+const showAmbientBtn = document.getElementById('toggle-ambient');
 
-const homeBtn = document.getElementById('home-btn');
-
-initAmbientSound();
+showAmbientBtn.addEventListener('click', () => {
+    //window.alert("You clicked me");
+    displayAmbient();
+});

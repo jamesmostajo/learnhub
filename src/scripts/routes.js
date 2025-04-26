@@ -4,6 +4,7 @@ let activeTabPath = null;
 import { renderFile } from './display.file.js';
 import { renderFlashcardsTab } from './display.flash-cards.js';  //function for displaying flashcards tab
 import { renderQuizTab } from './display.quiz.js'; //function for displaying quiz tab
+import { renderAmbientTab } from './display.ambient.js'; //function for displaying ambient tab
 
 const path = require('path');
 export function createTab(fullPath, initialContent) {
@@ -53,8 +54,10 @@ export function switchToTab(fullPath) {
   if (fullPath.startsWith('flashcards://')) { //added detection for type of tab to be rendered
     renderFlashcardsTab(fullPath);
   } else if (fullPath.startsWith('quizzes://')) { //added detection for type of tab to be rendered
-    renderQuizTab(fullPath); }
-  else {
+    renderQuizTab(fullPath); 
+  } else if (fullPath.startsWith('ambient://')) { //added detection for type of tab to be rendered
+    renderAmbientTab(fullPath); 
+  } else {
     renderFile(fullPath);
   }
 }
