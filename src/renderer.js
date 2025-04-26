@@ -36,6 +36,7 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
+import { displayHTML } from './scripts/display.html';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -44,3 +45,6 @@ selectFolderButton.addEventListener('click', () => openDirectory(fileList));
 
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', saveData);
+
+const settingsButton = document.getElementById('another-button');
+settingsButton.addEventListener('click', displayHTML);

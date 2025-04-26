@@ -1,4 +1,4 @@
-import { createTab, switchToTab } from './routes.js';
+import { createTab, switchToTab, tabState } from './routes.js';
 
 const fs = require('fs');
 const path = require('path');
@@ -32,6 +32,27 @@ export function handleFileClick(e, fullPath) {
   });
 }
 
+export function renderFile(fullPath) {
+  const windowEl = document.getElementById('file-content');
+  const saveButton = document.getElementById('save-button');
+  if (!tabState[fullPath] || !windowEl) return;
+
+  const { content } = tabState[fullPath];
+
+  windowEl.innerHTML = '';
+  windowEl.dataset.path = fullPath;
+
+  const textarea = document.createElement('textarea');
+  textarea.id = 'text-edit-area';
+  textarea.setAttribute('spellcheck', 'false');
+  textarea.value = content;
+
+  windowEl.appendChild(textarea);
+
+  if (saveButton) {
+    saveButton.removeAttribute('hidden');
+  }
+}
 
 export function saveData() {
   const fullPath = (document.getElementById('file-content')).dataset.path;

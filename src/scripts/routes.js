@@ -1,8 +1,12 @@
-const tabState = {};
+export const tabState = {};
 let activeTabPath = null;
+
+import { renderFile } from './display.file.js';
 
 const path = require('path');
 export function createTab(fullPath, initialContent) {
+  console.log(initialContent);
+
   if (!tabState[fullPath]) {
     const fileTabSection = document.getElementById('file-tabs');
 
@@ -43,7 +47,7 @@ export function createTab(fullPath, initialContent) {
 export function switchToTab(fullPath) {
   saveActiveTabState();
   activeTabPath = fullPath;
-  renderTab(fullPath);
+  renderFile(fullPath);
 }
 
 function saveActiveTabState() {
@@ -52,28 +56,6 @@ function saveActiveTabState() {
   const textarea = document.getElementById('text-edit-area');
   if (textarea) {
     tabState[activeTabPath].content = textarea.value;
-  }
-}
-
-function renderTab(fullPath) {
-  const windowEl = document.getElementById('file-content');
-  const saveButton = document.getElementById('save-button');
-  if (!tabState[fullPath] || !windowEl) return;
-
-  const { content } = tabState[fullPath];
-
-  windowEl.innerHTML = '';
-  windowEl.dataset.path = fullPath;
-
-  const textarea = document.createElement('textarea');
-  textarea.id = 'text-edit-area';
-  textarea.setAttribute('spellcheck', 'false');
-  textarea.value = content;
-
-  windowEl.appendChild(textarea);
-
-  if (saveButton) {
-    saveButton.removeAttribute('hidden');
   }
 }
 
@@ -99,7 +81,6 @@ function closeTab(fullPath, tabButton) {
     showDefaultDisplay();
   }
 }
-
 
 function showDefaultDisplay() {
   const windowEl = document.getElementById('window');
