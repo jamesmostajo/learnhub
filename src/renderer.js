@@ -62,7 +62,6 @@ const showFlashcardsBtn = document.getElementById('flash-cards-btn');
 showFlashcardsBtn.addEventListener('click', displayFlashcards);
 
 const showQuizBtn = document.getElementById('quiz-btn');
-
 showQuizBtn.addEventListener('click', displayQuiz);
 
 const timerBtn = document.getElementById('timer-btn');

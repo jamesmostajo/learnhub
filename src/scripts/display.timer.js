@@ -1,4 +1,5 @@
 import { createTab, switchToTab, tabState } from './routes.js';
+import { initializeTimer, timerSettings, formatTime } from './timer.js';
 
 export function displayTimer() {
   const timerPath = 'timer://Timer';
@@ -70,6 +71,30 @@ export function renderTimerTab(fullPath) {
   if (!windowEl) return;
 
   const content = tabState[fullPath]?.content || '';
-
   windowEl.innerHTML = content;
+
+  const savedSettings = tabState[fullPath]?.settings;
+  if (savedSettings) {
+    console.log('Loading settings from tabState:', savedSettings);
+    timerSettings.pomodoroTime = savedSettings.pomodoroTime;
+    timerSettings.shortBreakTime = savedSettings.shortBreakTime;
+    timerSettings.longBreakTime = savedSettings.longBreakTime;
+    timerSettings.longBreakInterval = savedSettings.longBreakInterval;
+    timerSettings.autoStartBreaks = savedSettings.autoStartBreaks;
+    timerSettings.autoStartPomodoros = savedSettings.autoStartPomodoros;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    if (timerDisplay) {
+      timerDisplay.innerHTML = formatTime(timerSettings.pomodoroTime);
+    }
+
+    document.getElementById('pomodoro-time').value = formatTime(timerSettings.pomodoroTime);
+    document.getElementById('short-break').value = formatTime(timerSettings.shortBreakTime);
+    document.getElementById('long-break').value = formatTime(timerSettings.longBreakTime);
+    document.getElementById('long-break-interval').value = timerSettings.longBreakInterval;
+    document.getElementById('auto-start-breaks').checked = timerSettings.autoStartBreaks;
+    document.getElementById('auto-start-pomodoros').checked = timerSettings.autoStartPomodoros;
+  }
+
+  initializeTimer();
 }
