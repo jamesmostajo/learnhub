@@ -16,14 +16,14 @@ module.exports = [
       },
     },
   },
-  // Add rule for .mp3 files
+  
   {
     test: /\.mp3$/,
     use: {
       loader: 'file-loader',
       options: {
         name: '[name].[hash].[ext]',
-        outputPath: 'assets/sounds/', // Optional: change the output folder
+        outputPath: 'assets/sounds/',
       },
     },
   },
