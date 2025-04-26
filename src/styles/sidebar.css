@@ -1,7 +1,22 @@
 .sidebar-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+
+.sidebar-header button {
+  flex: 1 1 calc(50% - 8px); /* each button roughly takes half the width, minus gap */
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  min-width: 0; /* allow shrinking properly */
+}
+
+.sidebar-header button:hover {
+  background-color: rgb(4, 93, 161);
 }
   
 #open-folder {
@@ -13,6 +28,22 @@
 }
 
 #another-button {
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#home-btn {
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#flash-cards-btn {
   background-color: rgb(30, 136, 218);
   color: white;
   border: none;

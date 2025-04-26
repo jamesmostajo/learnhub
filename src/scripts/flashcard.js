@@ -7,26 +7,17 @@ const flashcards = [
 let currentIndex = 0;
 let showingFront = true;
 
-window.addEventListener('DOMContentLoaded', () => {
-  console.log("✅ flashcard.js is running");
+export function initializeFlashcardControls() {
+  console.log("initializeFlashcardControls() loaded");
 
   const flashcardContainer = document.getElementById('flashcard-container');
   const front = document.getElementById('flashcard-front');
   const back = document.getElementById('flashcard-back');
   const progress = document.getElementById('flashcard-progress');
-  const fileView = document.querySelector('.file-view');
-  const showFlashcardsBtn = document.getElementById('show-flashcards');
 
-  console.log("🔎 Button found?", !!showFlashcardsBtn);
-
-  if (showFlashcardsBtn) {
-    showFlashcardsBtn.addEventListener('click', () => {
-      console.log("🎯 Flashcards button clicked!");
-
-      fileView.style.display = 'none';
-      flashcardContainer.style.display = 'block';
-      updateCardView();
-    });
+  if (!flashcardContainer || !front || !back || !progress) {
+    console.error("Flashcards not found");
+    return;
   }
 
   document.getElementById('flip-card').addEventListener('click', () => {
@@ -50,14 +41,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function updateCardView() {
-    const card = flashcards[currentIndex];
-    front.textContent = card.question;
-    back.textContent = card.answer;
+  updateCardView();
+}
 
-    front.style.display = showingFront ? 'block' : 'none';
-    back.style.display = showingFront ? 'none' : 'block';
+function updateCardView() {
+  const front = document.getElementById('flashcard-front');
+  const back = document.getElementById('flashcard-back');
+  const progress = document.getElementById('flashcard-progress');
 
-    progress.textContent = `Card ${currentIndex + 1} of ${flashcards.length}`;
-  }
-});
+  if (!front || !back || !progress) return;
+
+  const card = flashcards[currentIndex];
+  front.textContent = card.question;
+  back.textContent = card.answer;
+
+  front.style.display = showingFront ? 'block' : 'none';
+  back.style.display = showingFront ? 'none' : 'block';
+
+  progress.textContent = `Card ${currentIndex + 1} of ${flashcards.length}`;
+}

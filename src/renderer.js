@@ -35,10 +35,9 @@ import './styles/flashcards.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-import './scripts/flashcard.js';
+import { displayFlashcards } from './scripts/display.flash-cards';
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
-import { displayHTML } from './scripts/display.html';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -48,17 +47,15 @@ selectFolderButton.addEventListener('click', () => openDirectory(fileList));
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', saveData);
 
-const settingsButton = document.getElementById('another-button');
-settingsButton.addEventListener('click', displayHTML);
-
-const { ipcRenderer } = require('electron');
 const showFlashcardsBtn = document.getElementById('flash-cards-btn');
+  
+showFlashcardsBtn.addEventListener('click', () => {
+    //window.alert("You clicked me");
+    displayFlashcards();
+    });
 
-if (showFlashcardsBtn) {
-  showFlashcardsBtn.addEventListener('click', () => {
-    window.alert("You clicked me");
-    document.querySelector('.file-view').style.display = 'none';
-    document.getElementById('flashcard-container').style.display = 'block';
-  });
-}
+
+
+
+const homeBtn = document.getElementById('home-btn');
 
