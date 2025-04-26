@@ -1,112 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LearnHub</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #1e1e1e;
-      color: white;
-      display: flex;
-      height: 100vh;
-    }
-
-    .container {
-      display: flex;
-      width: 100%;
-    }
-
-    .sidebar {
-      width: 200px;
-      background: #2d2d2d;
-      color: white;
-      padding: 1em;
-    }
-
-    .sidebar-header {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    }
-
-    .sidebar button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 1rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .sidebar button:hover {
-      background-color: #0056b3;
-    }
-
-    .main-pane {
-      flex: 1;
-      padding: 2em;
-    }
-
-    .file-view {
-      display: block;
-    }
-
-    #flashcard-container {
-      padding: 30px;
-      display: none;
-    }
-
-    #flashcard {
-      background-color: #ffffff;
-      color: #1a1a1a;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      padding: 40px;
-      margin: 0 auto;
-      width: 80%;
-      font-size: 1.5rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .card-face {
-      min-height: 100px;
-      font-weight: bold;
-    }
-
-    #flashcard-controls {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #flashcard-controls button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    #flashcard-controls button:hover {
-      background-color: #0056b3;
-    }
-
-    #flashcard-progress {
-      margin-top: 10px;
-      text-align: center;
-      color: #ffffff;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
 </head>
 <body>
   <div class="container">
@@ -116,14 +13,15 @@
         <h2>Files</h2>
         <button id="open-folder">Open Folder</button>
         <button id="another-button">Settings</button>
-        <button id="show-flashcards">Flashcards</button>
+        <button id="flash-cards-btn">Flash Cards</button>
       </div>
-      <ul class="file-list"></ul>
+      <ul class="file-list">
+      </ul>
     </div>
 
     <!-- Main Pane -->
-    <div class="main-pane">
-      <div class="file-view">
+    <div class="main-pane"> <!-- Start of Main Pane -->
+      <div class="file-view"> <!-- Start of File View -->
         <div class="file-header">
           <div id="file-tabs"></div>
           <button id="save-button" hidden>Save</button>
@@ -131,27 +29,24 @@
           <div id="window">
             <pre id="file-content"></pre>
           </div>
-        <pre id="file-content"></pre>
-      </div>
-
-      <!-- Flash Cards -->
-      <div id="flashcard-container">
+        </div>
+      </div> <!-- End of File View -->
+      
+      <div id="flashcard-container" style="display: none;">
         <div id="flashcard">
           <div id="flashcard-front" class="card-face">Question</div>
           <div id="flashcard-back" class="card-face" style="display:none;">Answer</div>
         </div>
-
+    
         <div id="flashcard-controls">
           <button id="prev-card">Previous</button>
           <button id="flip-card">Flip</button>
           <button id="next-card">Next</button>
         </div>
-
+    
         <div id="flashcard-progress">Card 1 of X</div>
-      </div>
-    </div>
+      </div>      
+    </div> <!-- End of Main Pane -->
   </div>
-
-  <script src="./scripts/flashcard.js"></script>
 </body>
 </html>

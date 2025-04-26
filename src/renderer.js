@@ -31,10 +31,11 @@ import './styles/layout.css';
 import './styles/sidebar.css';
 import './styles/main-pane.css';
 import './styles/tabs.css';
-import './scripts/flashcard.js';
+import './styles/flashcards.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
+import './scripts/flashcard.js';
 import { openDirectory } from './scripts/open.folder';
 import { saveData } from './scripts/display.file';
 import { displayHTML } from './scripts/display.html';
@@ -49,3 +50,15 @@ saveButton.addEventListener('click', saveData);
 
 const settingsButton = document.getElementById('another-button');
 settingsButton.addEventListener('click', displayHTML);
+
+const { ipcRenderer } = require('electron');
+const showFlashcardsBtn = document.getElementById('flash-cards-btn');
+
+if (showFlashcardsBtn) {
+  showFlashcardsBtn.addEventListener('click', () => {
+    window.alert("You clicked me");
+    document.querySelector('.file-view').style.display = 'none';
+    document.getElementById('flashcard-container').style.display = 'block';
+  });
+}
+
