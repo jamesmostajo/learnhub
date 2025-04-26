@@ -33,6 +33,11 @@ import './styles/main-pane.css';
 import './styles/tabs.css';
 import './styles/flashcards.css';
 
+
+import './scripts/flashcard.js';
+import './scripts/quiz.js';
+
+
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
 import { displayFlashcards } from './scripts/display.flash-cards';
