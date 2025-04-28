@@ -36,7 +36,6 @@ import './styles/tabs.css';
 import './styles/timer.css';
 import './styles/flashcards.css';
 
-
 import './scripts/flashcard.js';
 import './scripts/quiz.js';
 
@@ -69,3 +68,108 @@ timerBtn.addEventListener('click', displayTimer);
 
 const showAmbientBtn = document.getElementById('toggle-ambient');
 showAmbientBtn.addEventListener('click', displayAmbient);
+
+
+// 🕒 Study Timer Logic
+const { ipcRenderer } = require('electron');
+
+let pomodoroTime = 25 * 60;
+let shortBreakTime = 5 * 60;
+let longBreakTime = 15 * 60;
+let longBreakInterval = 4;
+let autoStartBreaks = false;
+let autoStartPomodoros = false;
+
+const timerDisplay = document.getElementById('timerDisplay');
+const startButton = document.getElementById('startTimer');
+const stopButton = document.getElementById('stopTimer');
+const settingsModal = document.getElementById('timer-settings');
+const settingsButton = document.getElementById('open-settings');
+
+// 🕒 Open Timer Settings
+settingsButton.addEventListener('click', () => {
+    settingsModal.style.display = "block";
+});
+
+// ❌ Close Timer Settings
+document.querySelector('.close').addEventListener('click', () => {
+    settingsModal.style.display = "none";
+});
+
+// 🎯 Save Settings
+document.getElementById('save-settings').addEventListener('click', () => {
+    pomodoroTime = convertTime(document.getElementById('pomodoro-time').value);
+    shortBreakTime = convertTime(document.getElementById('short-break').value);
+    longBreakTime = convertTime(document.getElementById('long-break').value);
+    longBreakInterval = parseInt(document.getElementById('long-break-interval').value, 10);
+    autoStartBreaks = document.getElementById('auto-start-breaks').checked;
+    autoStartPomodoros = document.getElementById('auto-start-pomodoros').checked;
+
+    // Reset the timer to the new Pomodoro duration
+    timeLeft = pomodoroTime;
+    timerDisplay.innerText = formatTime(timeLeft);
+
+    settingsModal.style.display = "none";
+});
+
+// 🕒 Timer Functionality
+let timer;
+let cycles = 0;
+let timeLeft = pomodoroTime;
+let currentMode = "pomodoro";
+
+startButton.addEventListener('click', () => {
+    ipcRenderer.send('study-session-start');
+    timer = setInterval(updateTimer, 1000);
+});
+
+stopButton.addEventListener('click', () => {
+    clearInterval(timer);
+    ipcRenderer.send('study-session-end');
+});
+
+function updateTimer() {
+    if (timeLeft > 0) {
+        timeLeft--;
+        timerDisplay.innerText = formatTime(timeLeft);
+    } else {
+        clearInterval(timer);
+        ipcRenderer.send('study-session-end');
+        cycles++;
+
+        if (currentMode === "pomodoro") {
+            if (cycles % longBreakInterval === 0) {
+                startBreak(longBreakTime, "long");
+            } else {
+                startBreak(shortBreakTime, "short");
+            }
+        } else if (autoStartPomodoros) {
+            startPomodoro();
+        }
+    }
+}
+
+function startBreak(duration, type) {
+    currentMode = type;
+    timeLeft = duration;
+    if (autoStartBreaks) {
+        timer = setInterval(updateTimer, 1000);
+    }
+}
+
+function startPomodoro() {
+    currentMode = "pomodoro";
+    timeLeft = pomodoroTime;
+    timer = setInterval(updateTimer, 1000);
+}
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function convertTime(timeString) {
+    const [minutes, seconds] = timeString.split(":").map(Number);
+    return (minutes * 60) + (seconds || 0);
+}
