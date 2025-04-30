@@ -1,4 +1,5 @@
 import { createTab, switchToTab, tabState, markTabAsActive } from './routes.js';
+import { loadFolderContents } from './open.file';
 
 const fs = require('fs');
 const path = require('path');
@@ -55,15 +56,62 @@ export function renderFile(fullPath) {
 }
 
 export function saveData() {
-  const fullPath = (document.getElementById('file-content')).dataset.path;
-  const newData = (document.getElementById('text-edit-area')).value;
+  const fullPath = document.getElementById('file-content').dataset.path;
+  const newData = document.getElementById('text-edit-area').value;
 
-  fs.writeFile(fullPath, newData, 'utf8', (err) => {
-    if (err) {
-      console.error('Error saving file:', err);
-      alert('Error saving file.');
-    } else {
-      alert('File saved successfully.');
-    }
-  });
+  const { dialog } = require('@electron/remote');
+  const fs = require('fs');
+  const path = require('path');
+
+  if (!fullPath || fullPath.startsWith('unsaved-')) {
+    // If the file is unsaved, prompt the user to save it
+    dialog.showSaveDialog({
+      title: 'Save File',
+      defaultPath: 'new-file.txt',
+    }).then((result) => {
+      if (!result.canceled && result.filePath) {
+        fs.writeFile(result.filePath, newData, 'utf8', (err) => {
+          if (err) {
+            console.error('Error saving file:', err);
+            alert('Error saving file.');
+          } else {
+            // Update the tab state and refresh the sidebar
+            const fileList = document.querySelector('.file-list');
+            loadFolderContents(path.dirname(result.filePath), fileList);
+
+            // Update the tabState and tab name
+            const oldPath = fullPath;
+            const newPath = result.filePath;
+
+            tabState[newPath] = { content: newData };
+            delete tabState[oldPath];
+
+            const tabElement = document.querySelector(`#file-tabs .tab[data-path="${oldPath}"]`);
+            if (tabElement) {
+              tabElement.dataset.path = newPath;
+              const nameSpan = tabElement.querySelector('.tab-name');
+              if (nameSpan) {
+                nameSpan.textContent = path.basename(newPath);
+              }
+            }
+
+            switchToTab(newPath);
+            alert('File saved successfully.');
+          }
+        });
+      }
+    }).catch((err) => {
+      console.error('Error showing save dialog:', err);
+    });
+  } else {
+    // If the file already has a path, save it directly
+    fs.writeFile(fullPath, newData, 'utf8', (err) => {
+      if (err) {
+        console.error('Error saving file:', err);
+        alert('Error saving file.');
+      } else {
+        alert('File saved successfully.');
+      }
+    });
+  }
 }

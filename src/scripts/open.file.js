@@ -5,6 +5,8 @@ import { handleFileClick } from './display.file';
 import { createDirectorySidebarContainer } from './style.directory';
 
 export function loadFolderContents(directoryPath, parentElement) {
+  parentElement.innerHTML = '';
+
   fs.readdir(directoryPath, (err, files) => {
     if (err) {
       return console.error('Unable to scan directory: ' + err);

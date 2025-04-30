@@ -108,3 +108,20 @@ function showDefaultDisplay() {
   windowEl.innerHTML = '<pre id="file-content">No file open.</pre>';
   document.getElementById('save-button')?.setAttribute('hidden', 'hidden');
 }
+
+export function createNewFile() {
+  const fileContentEl = document.getElementById('file-content');
+  const saveButton = document.getElementById('save-button');
+
+  // Create a new tab for the unsaved file
+  const tempPath = `unsaved-${Date.now()}`;
+  createTab(tempPath, '');
+  switchToTab(tempPath);
+
+  // Allow editing in the file content area
+  fileContentEl.innerHTML = '';
+  const textarea = document.createElement('textarea');
+  textarea.id = 'text-edit-area';
+  textarea.setAttribute('spellcheck', 'false');
+  fileContentEl.appendChild(textarea);
+}
