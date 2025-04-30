@@ -29,13 +29,24 @@ function updateTimerDisplay(seconds) {
 
 function switchMode(mode) {
     currentMode = mode;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const header = document.querySelector('h3');
+    let type = "";
     if (mode === "pomodoro") {
         timeLeft = timerSettings.pomodoroTime;
+        timerDisplay.style.backgroundColor = "rgb(150, 0, 0)";
+        type = "Study Mode";
     } else if (mode === "shortBreak") {
         timeLeft = timerSettings.shortBreakTime;
+        timerDisplay.style.backgroundColor = "rgb(0, 86, 43)";
+        type = "Short Break"
     } else if (mode === "longBreak") {
         timeLeft = timerSettings.longBreakTime;
+        timerDisplay.style.backgroundColor = "rgb(0, 54, 86)";
+        type = "Long Break";
     }
+    header.innerHTML = "Study Timer: " + type;
+
     updateTimerDisplay(timeLeft);
 }
 
