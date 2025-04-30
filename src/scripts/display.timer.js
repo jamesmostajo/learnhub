@@ -1,4 +1,4 @@
-import { initializeTimer, startTimer, stopTimer, timerSettings } from './timer.js';
+import { initializeTimer, startTimer, stopTimer, timerSettings, saveTimerSettings } from './timer.js';
 
 export function displayTimer() {
     const startButton = document.getElementById('startTimer');
@@ -29,6 +29,9 @@ export function displayTimer() {
         timerSettings.autoStartBreaks = autoStartBreaks;
         timerSettings.autoStartPomodoros = autoStartPomodoros;
         timerSettings.longBreakInterval = longBreakInterval;
+
+        // Save updated settings to localStorage
+        saveTimerSettings();
 
         // Stop the current timer
         stopTimer();

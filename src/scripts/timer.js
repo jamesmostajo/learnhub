@@ -1,4 +1,5 @@
-export const timerSettings = {
+// Load timer settings from localStorage or use default settings
+export const timerSettings = JSON.parse(localStorage.getItem('timerSettings')) || {
     pomodoroTime: 25 * 60,
     shortBreakTime: 5 * 60,
     longBreakTime: 15 * 60,
@@ -6,6 +7,13 @@ export const timerSettings = {
     autoStartBreaks: false,
     autoStartPomodoros: false,
 };
+
+function saveTimerSettings() {
+    localStorage.setItem('timerSettings', JSON.stringify(timerSettings));
+}
+
+// Call saveTimerSettings whenever settings are updated
+export { saveTimerSettings };
 
 let timer;
 let cycles = 0;
