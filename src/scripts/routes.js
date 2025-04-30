@@ -4,7 +4,6 @@ let activeTabPath = null;
 import { renderFile } from './display.file.js';
 import { renderFlashcardsTab } from './display.flash-cards.js';  //function for displaying flashcards tab
 import { renderQuizTab } from './display.quiz.js'; //function for displaying quiz tab
-import { renderTimerTab } from './display.timer.js';
 import { renderAmbientTab } from './display.ambient.js'; //function for displaying ambient tab
 import { renderCalendarTab } from './display.calendar.js'; //function for displaying ambient tab
 
@@ -58,8 +57,6 @@ export function switchToTab(fullPath) {
     renderFlashcardsTab(fullPath);
   } else if (fullPath.startsWith('quizzes://')) { //added detection for type of tab to be rendered
     renderQuizTab(fullPath);
-  } else if (fullPath.startsWith('timer://')) {
-    renderTimerTab(fullPath);
   } else if (fullPath.startsWith('ambient://')) { //added detection for type of tab to be rendered
     renderAmbientTab(fullPath);
   } else if (fullPath.startsWith('calendar://')) { //added detection for type of tab to be rendered

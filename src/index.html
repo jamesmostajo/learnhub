@@ -12,7 +12,6 @@
       <div class="sidebar-header">
         <h2>Files</h2>
         <button id="open-folder">Open Folder</button>
-        <button id="timer-btn">Timer</button>
         <button id="flash-cards-btn">Flash Cards</button>
         <button id="quiz-btn">Quiz</button>
         <button id="toggle-ambient">Ambient Sound</button>
@@ -22,52 +21,68 @@
     </div>
 
     <!-- Main Pane -->
-    <div class="main-pane"> <!-- Start of Main Pane -->
+    <div class="main-pane">
       <div class="file-view"> <!-- Start of File View -->
         <div class="file-header">
           <div id="file-tabs"></div>
-          <button id="save-button" hidden>Save</button>
+            <button id="save-button" hidden>Save</button>
+          </div>
+          <div id="window">
+            <pre id="file-content"></pre>
+          </div>
+          <div class="to-center">
+            <div id="timer-container">
+              <h3>Study Timer: Study Mode</h3>
+              <div id="timerDisplay">25:00</div>
+              <div id="start-stop">
+                <button id="startTimer">Start</button>
+                <button id="stopTimer">Stop</button>
+                <button id="open-settings">⚙ Settings</button>
+              </div>
+            </div>        
+          </div>
         </div>
-        <pre id="file-content"></pre>
-      </div>
-
-      <!-- 📌 Study Timer UI -->
-      <div id="timer-container">
-        <h3>Study Timer</h3>
-        <p id="timerDisplay">25:00</p>
-        <button id="startTimer">Start</button>
-        <button id="stopTimer">Stop</button>
-        <button id="open-settings">⚙ Settings</button>
       </div>
     </div>
-  </div>
 
-  <!-- 📌 Timer Settings Modal -->
-  <div id="timer-settings" class="modal">
-    <div class="modal-content">
+  <dialog id="timer-settings">
       <span class="close">&times;</span>
-      <h3>Timer Settings</h3>
+      <h3>Timer Settings (minutes : seconds)</h3>
 
-      <label for="pomodoro-time">Pomodoro (minutes: seconds)</label>
-      <input type="text" id="pomodoro-time" value="25:00">
+        <div id="pomodoro-labels">
+          <div class="pomodoro-inputs">
+            <label for="pomodoro-time">Pomodoro</label>        
+            <input type="text" id="pomodoro-time" value="25:00">
+          </div>
+          
+          <div class="pomodoro-inputs">
+            <label for="short-break">Short Break</label>
+            <input type="text" id="short-break" value="5:00">
+          </div>
+          
+          <div class="pomodoro-inputs">
+            <label for="long-break">Long Break</label>
+            <input type="text" id="long-break" value="15:00">
+          </div>
+        </div>
+          
+        <div id="other-options">
+          <div class="pomodoro-other-inputs">
+            <label for="auto-start-breaks">Auto Start Breaks</label>
+            <input type="checkbox" id="auto-start-breaks">
+          </div>
 
-      <label for="short-break">Short Break</label>
-      <input type="text" id="short-break" value="5:00">
+          <div class="pomodoro-other-inputs">
+            <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
+            <input type="checkbox" id="auto-start-pomodoros">
+          </div>
 
-      <label for="long-break">Long Break</label>
-      <input type="text" id="long-break" value="15:00">
-
-      <label for="auto-start-breaks">Auto Start Breaks</label>
-      <input type="checkbox" id="auto-start-breaks">
-
-      <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
-      <input type="checkbox" id="auto-start-pomodoros">
-
-      <label for="long-break-interval">Long Break Interval</label>
-      <input type="number" id="long-break-interval" value="4">
-
-      <button id="save-settings">Save</button>
-    </div>
+          <div class="pomodoro-other-inputs">
+            <label for="long-break-interval">Long Break Interval</label>
+            <input type="number" id="long-break-interval" value="4">
+          </div>
+          <button id="save-settings">Save Settings</button>
+    </dialog>
   </div>
 </body>
 </html>

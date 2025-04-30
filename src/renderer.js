@@ -65,8 +65,7 @@ showFlashcardsBtn.addEventListener('click', displayFlashcards);
 const showQuizBtn = document.getElementById('quiz-btn');
 showQuizBtn.addEventListener('click', displayQuiz);
 
-const timerBtn = document.getElementById('timer-btn');
-timerBtn.addEventListener('click', displayTimer);
+displayTimer();
 
 const showAmbientBtn = document.getElementById('toggle-ambient');
 showAmbientBtn.addEventListener('click', displayAmbient);

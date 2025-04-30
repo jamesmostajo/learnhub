@@ -1,6 +1,5 @@
-import { tabState } from "./routes";
-
-export const timerSettings = {
+// Load timer settings from localStorage or use default settings
+export const timerSettings = JSON.parse(localStorage.getItem('timerSettings')) || {
     pomodoroTime: 25 * 60,
     shortBreakTime: 5 * 60,
     longBreakTime: 15 * 60,
@@ -9,90 +8,89 @@ export const timerSettings = {
     autoStartPomodoros: false,
 };
 
+function saveTimerSettings() {
+    localStorage.setItem('timerSettings', JSON.stringify(timerSettings));
+}
+
+// Call saveTimerSettings whenever settings are updated
+export { saveTimerSettings };
+
 let timer;
 let cycles = 0;
 let timeLeft = timerSettings.pomodoroTime;
 let currentMode = "pomodoro";
+let isTimerRunning = false; // Track if the timer is running
 
 export function initializeTimer() {
-    const startButton = document.getElementById('startTimer');
-    const stopButton = document.getElementById('stopTimer');
-
-    document.getElementById('save-settings').addEventListener('click', saveData);
-    startButton.addEventListener('click', () => {
-        timer = setInterval(updateTimer, 1000);
-    });
-
-    stopButton.addEventListener('click', () => {
-        clearInterval(timer);
-    });
+    timeLeft = timerSettings.pomodoroTime; // Reset timeLeft based on updated settings
+    updateTimerDisplay(timeLeft);
 }
 
-function saveData() {
-    console.log('Saving data...');
-    timerSettings.pomodoroTime = convertTime(document.getElementById('pomodoro-time').value);
-    timerSettings.shortBreakTime = convertTime(document.getElementById('short-break').value);
-    timerSettings.longBreakTime = convertTime(document.getElementById('long-break').value);
-    timerSettings.longBreakInterval = parseInt(document.getElementById('long-break-interval').value, 10);
-    timerSettings.autoStartBreaks = document.getElementById('auto-start-breaks').checked;
-    timerSettings.autoStartPomodoros = document.getElementById('auto-start-pomodoros').checked;
-
-    // Save the settings to the tabState object
-    const timerPath = 'timer://Timer';
-    if (!tabState[timerPath]) {
-        tabState[timerPath] = {};
-    }
-    tabState[timerPath].settings = timerSettings;
-
+function updateTimerDisplay(seconds) {
     const timerDisplay = document.getElementById('timerDisplay');
     if (timerDisplay) {
-        timerDisplay.innerHTML = formatTime(timerSettings.pomodoroTime);
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        timerDisplay.innerText = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 }
 
-export function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+function switchMode(mode) {
+    currentMode = mode;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const header = document.querySelector('h3');
+    let type = "";
+    if (mode === "pomodoro") {
+        timeLeft = timerSettings.pomodoroTime;
+        timerDisplay.style.backgroundColor = "rgb(150, 0, 0)";
+        type = "Study Mode";
+    } else if (mode === "shortBreak") {
+        timeLeft = timerSettings.shortBreakTime;
+        timerDisplay.style.backgroundColor = "rgb(0, 86, 43)";
+        type = "Short Break"
+    } else if (mode === "longBreak") {
+        timeLeft = timerSettings.longBreakTime;
+        timerDisplay.style.backgroundColor = "rgb(0, 54, 86)";
+        type = "Long Break";
+    }
+    header.innerHTML = "Study Timer: " + type;
+
+    updateTimerDisplay(timeLeft);
 }
 
-function convertTime(timeString) {
-    const [minutes, seconds] = timeString.split(":").map(Number);
-    return (minutes * 60) + (seconds || 0);
-}
+function startTimer() {
+    if (isTimerRunning) return; // Prevent multiple timers from starting
 
+    isTimerRunning = true;
+    timer = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateTimerDisplay(timeLeft);
+        } else {
+            clearInterval(timer);
+            isTimerRunning = false; // Reset the timer running state
 
-function updateTimer() {
-    if (timeLeft > 0) {
-        timeLeft--;
-        timerDisplay.innerText = formatTime(timeLeft);
-    } else {
-        clearInterval(timer);
-        ipcRenderer.send('study-session-end');
-        cycles++;
-
-        if (currentMode === "pomodoro") {
-            if (cycles % longBreakInterval === 0) {
-                startBreak(longBreakTime, "long");
+            if (currentMode === "pomodoro") {
+                cycles++;
+                if (cycles % timerSettings.longBreakInterval === 0) {
+                    switchMode("longBreak");
+                } else {
+                    switchMode("shortBreak");
+                }
             } else {
-                startBreak(shortBreakTime, "short");
+                switchMode("pomodoro");
             }
-        } else if (autoStartPomodoros) {
-            startPomodoro();
+
+            if (timerSettings.autoStartBreaks || timerSettings.autoStartPomodoros) {
+                startTimer();
+            }
         }
-    }
+    }, 1000);
 }
 
-function startBreak(duration, type) {
-    currentMode = type;
-    timeLeft = duration;
-    if (autoStartBreaks) {
-        timer = setInterval(updateTimer, 1000);
-    }
+function stopTimer() {
+    clearInterval(timer);
+    isTimerRunning = false; // Reset the timer running state
 }
 
-function startPomodoro() {
-    currentMode = "pomodoro";
-    timeLeft = pomodoroTime;
-    timer = setInterval(updateTimer, 1000);
-}
+export { startTimer, stopTimer };

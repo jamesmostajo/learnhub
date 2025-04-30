@@ -1,100 +1,68 @@
-import { createTab, switchToTab, tabState } from './routes.js';
-import { initializeTimer, timerSettings, formatTime } from './timer.js';
+import { initializeTimer, startTimer, stopTimer, timerSettings, saveTimerSettings } from './timer.js';
 
 export function displayTimer() {
-  const timerPath = 'timer://Timer';
-  const timerHTML = `
-    <div id="timer-container">
-      <h3>Study Timer</h3>
-      <div id="timerDisplay">25:00</div>
-      <div id="start-stop">
-        <button id="startTimer">Start</button>
-        <button id="stopTimer">Stop</button>
-      </div>
-    </div>
+    const startButton = document.getElementById('startTimer');
+    const stopButton = document.getElementById('stopTimer');
+    const settingsButton = document.getElementById('open-settings');
+    const settingsDialog = document.getElementById('timer-settings');
+    const closeButton = settingsDialog.querySelector('.close');
 
-    <div id="timer-settings">
-        <h3>Timer Settings (minutes : seconds)</h3>
+    // Attach event listeners to buttons
+    startButton.addEventListener('click', startTimer);
+    stopButton.addEventListener('click', stopTimer);
+    settingsButton.addEventListener('click', () => {
+        // Populate settings dialog with current timer settings
+        document.getElementById('pomodoro-time').value = formatTime(timerSettings.pomodoroTime);
+        document.getElementById('short-break').value = formatTime(timerSettings.shortBreakTime);
+        document.getElementById('long-break').value = formatTime(timerSettings.longBreakTime);
+        document.getElementById('auto-start-breaks').checked = timerSettings.autoStartBreaks;
+        document.getElementById('auto-start-pomodoros').checked = timerSettings.autoStartPomodoros;
+        document.getElementById('long-break-interval').value = timerSettings.longBreakInterval;
 
-        <div id="pomodoro-labels">
-          <div class="pomodoro-inputs">
-            <label for="pomodoro-time">Pomodoro</label>        
-            <input type="text" id="pomodoro-time" value="25:00">
-          </div>
-          
-          <div class="pomodoro-inputs">
-            <label for="short-break">Short Break</label>
-            <input type="text" id="short-break" value="5:00">
-          </div>
-          
-          <div class="pomodoro-inputs">
-            <label for="long-break">Long Break</label>
-            <input type="text" id="long-break" value="15:00">
-          </div>
-        </div>
-          
-        <div id="other-options">
-          <div class="pomodoro-other-inputs">
-            <label for="auto-start-breaks">Auto Start Breaks</label>
-            <input type="checkbox" id="auto-start-breaks">
-          </div>
+        settingsDialog.showModal();
+    });
+    closeButton.addEventListener('click', () => settingsDialog.close());
 
-          <div class="pomodoro-other-inputs">
-            <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
-            <input type="checkbox" id="auto-start-pomodoros">
-          </div>
+    const saveSettingsButton = document.getElementById('save-settings');
+    saveSettingsButton.addEventListener('click', () => {
+        const pomodoroInput = document.getElementById('pomodoro-time').value;
+        const shortBreakInput = document.getElementById('short-break').value;
+        const longBreakInput = document.getElementById('long-break').value;
+        const autoStartBreaks = document.getElementById('auto-start-breaks').checked;
+        const autoStartPomodoros = document.getElementById('auto-start-pomodoros').checked;
+        const longBreakInterval = parseInt(document.getElementById('long-break-interval').value, 10);
 
-          <div class="pomodoro-other-inputs">
-            <label for="long-break-interval">Long Break Interval</label>
-            <input type="number" id="long-break-interval" value="4">
-          </div>
-        <button id="save-settings">Save Settings</button>
-        </div>
-      </div>
-    </div>
-  `;
+        // Update timer settings
+        timerSettings.pomodoroTime = parseTimeInput(pomodoroInput);
+        timerSettings.shortBreakTime = parseTimeInput(shortBreakInput);
+        timerSettings.longBreakTime = parseTimeInput(longBreakInput);
+        timerSettings.autoStartBreaks = autoStartBreaks;
+        timerSettings.autoStartPomodoros = autoStartPomodoros;
+        timerSettings.longBreakInterval = longBreakInterval;
 
-  if (!tabState[timerPath]) {
-    createTab(timerPath, timerHTML);
-  }
+        // Save updated settings to localStorage
+        saveTimerSettings();
 
-  switchToTab(timerPath);
+        // Stop the current timer
+        stopTimer();
 
-  const saveButton = document.getElementById('save-button');
-  if (saveButton) {
-    saveButton.setAttribute('hidden', 'hidden');
-  }
-}
+        // Reset the timer display
+        initializeTimer();
 
-export function renderTimerTab(fullPath) {
-  const windowEl = document.getElementById('file-content');
-  if (!windowEl) return;
+        settingsDialog.close();
+    });
 
-  const content = tabState[fullPath]?.content || '';
-  windowEl.innerHTML = content;
-
-  const savedSettings = tabState[fullPath]?.settings;
-  if (savedSettings) {
-    console.log('Loading settings from tabState:', savedSettings);
-    timerSettings.pomodoroTime = savedSettings.pomodoroTime;
-    timerSettings.shortBreakTime = savedSettings.shortBreakTime;
-    timerSettings.longBreakTime = savedSettings.longBreakTime;
-    timerSettings.longBreakInterval = savedSettings.longBreakInterval;
-    timerSettings.autoStartBreaks = savedSettings.autoStartBreaks;
-    timerSettings.autoStartPomodoros = savedSettings.autoStartPomodoros;
-
-    const timerDisplay = document.getElementById('timerDisplay');
-    if (timerDisplay) {
-      timerDisplay.innerHTML = formatTime(timerSettings.pomodoroTime);
+    function parseTimeInput(input) {
+        const [minutes, seconds] = input.split(':').map(Number);
+        return minutes * 60 + (seconds || 0);
     }
 
-    document.getElementById('pomodoro-time').value = formatTime(timerSettings.pomodoroTime);
-    document.getElementById('short-break').value = formatTime(timerSettings.shortBreakTime);
-    document.getElementById('long-break').value = formatTime(timerSettings.longBreakTime);
-    document.getElementById('long-break-interval').value = timerSettings.longBreakInterval;
-    document.getElementById('auto-start-breaks').checked = timerSettings.autoStartBreaks;
-    document.getElementById('auto-start-pomodoros').checked = timerSettings.autoStartPomodoros;
-  }
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
 
-  initializeTimer();
+    // Initialize the timer
+    initializeTimer();
 }

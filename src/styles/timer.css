@@ -3,7 +3,7 @@
 }
 
 #timerDisplay{
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(150, 0, 0);
   font-size: 50pt;
   border-radius: 25px;
   display: flex;
@@ -80,3 +80,19 @@
   border: none;
 }
 
+dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(68, 68, 68);
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+
+dialog[open] {
+  display: block;
+}

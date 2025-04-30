@@ -16,3 +16,8 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.to-center{
+  display: flex;
+  justify-content: center;
+}
