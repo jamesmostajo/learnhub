@@ -80,3 +80,19 @@
   border: none;
 }
 
+dialog {
+  display: none; /* Ensure the dialog is hidden by default */
+  position: fixed; /* Centers the dialog */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(68, 68, 68); /* Optional: Set a background color */
+  padding: 20px; /* Add padding for content inside the dialog */
+  border-radius: 10px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+}
+
+dialog[open] {
+  display: block; /* Ensure the dialog is displayed when open */
+}
+
