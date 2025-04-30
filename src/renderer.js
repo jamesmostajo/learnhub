@@ -36,6 +36,7 @@ import './styles/tabs.css';
 import './styles/timer.css';
 import './styles/flashcards.css';
 import './styles/calendar.css';
+import './styles/ambient.css';
 
 import './scripts/flashcard.js';
 import './scripts/quiz.js';

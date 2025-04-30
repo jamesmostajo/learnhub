@@ -5,18 +5,22 @@ export function displayAmbient() {
   const AmbientPath = 'ambient://Ambient';
 
   const AmbientHTML = `
+    <div class="to-center">
     <div id="ambient-container">
         <h2>Ambient Sound</h2>
         <label for="sound-select">Choose a sound:</label>
+        <div class="custom-select">
         <select id="sound-select">
           <option value="none">None</option>
           <option value="rain">Rain</option>
           <option value="cafe">Café</option>
           <option value="nature">Nature</option>
         </select>
+        </div>
         <br><br>
         <button id="play-sound">Play</button>
         <button id="stop-sound">Stop</button>
+    </div>
     </div>
   `;
 
