@@ -35,7 +35,7 @@ import './styles/main-pane.css';
 import './styles/tabs.css';
 import './styles/timer.css';
 import './styles/flashcards.css';
-
+import './styles/calendar.css';
 
 import './scripts/flashcard.js';
 import './scripts/quiz.js';
@@ -49,6 +49,7 @@ import { saveData } from './scripts/display.file';
 import { displayTimer } from './scripts/display.timer';
 import { displayQuiz } from './scripts/display.quiz.js';
 import { displayAmbient } from './scripts/display.ambient.js';
+import { displayCalendar } from './scripts/display.calendar.js';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -69,3 +70,6 @@ timerBtn.addEventListener('click', displayTimer);
 
 const showAmbientBtn = document.getElementById('toggle-ambient');
 showAmbientBtn.addEventListener('click', displayAmbient);
+
+const showCalendarBtn = document.getElementById('calendar-btn');
+showCalendarBtn.addEventListener('click', displayCalendar);

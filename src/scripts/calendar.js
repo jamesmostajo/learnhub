@@ -13,7 +13,7 @@ export function initializeCalendar() {
 
     let currentDate = new Date();
     let selectedDate = new Date();
-    let events = JSON.parse(localStorage.getItem('events') || {};
+    let events = JSON.parse(localStorage.getItem('events') || '{}');
 
     function updateClock() {
         if (clockEl) clockEl.textContent = new Date().toLocaleTimeString();

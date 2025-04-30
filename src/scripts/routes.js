@@ -6,6 +6,8 @@ import { renderFlashcardsTab } from './display.flash-cards.js';  //function for 
 import { renderQuizTab } from './display.quiz.js'; //function for displaying quiz tab
 import { renderTimerTab } from './display.timer.js';
 import { renderAmbientTab } from './display.ambient.js'; //function for displaying ambient tab
+import { renderCalendarTab } from './display.calendar.js'; //function for displaying ambient tab
+
 
 const path = require('path');
 export function createTab(fullPath, initialContent) {
@@ -60,6 +62,8 @@ export function switchToTab(fullPath) {
     renderTimerTab(fullPath);
   } else if (fullPath.startsWith('ambient://')) { //added detection for type of tab to be rendered
     renderAmbientTab(fullPath);
+  } else if (fullPath.startsWith('calendar://')) { //added detection for type of tab to be rendered
+    renderCalendarTab(fullPath);
   } else {
     renderFile(fullPath);
   }
