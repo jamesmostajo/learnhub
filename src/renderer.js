@@ -65,10 +65,10 @@ showFlashcardsBtn.addEventListener('click', displayFlashcards);
 const showQuizBtn = document.getElementById('quiz-btn');
 showQuizBtn.addEventListener('click', displayQuiz);
 
-displayTimer();
-
 const showAmbientBtn = document.getElementById('toggle-ambient');
 showAmbientBtn.addEventListener('click', displayAmbient);
 
 const showCalendarBtn = document.getElementById('calendar-btn');
 showCalendarBtn.addEventListener('click', displayCalendar);
+
+displayTimer();

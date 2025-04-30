@@ -52,6 +52,11 @@ export function createTab(fullPath, initialContent) {
 export function switchToTab(fullPath) {
   saveActiveTabState();
   activeTabPath = fullPath;
+  
+  const fileTab = document.querySelector(`#file-tabs .tab[data-path="${fullPath}"]`);
+  if (fileTab) {
+    markTabAsActive(fileTab);
+  }
 
   if (fullPath.startsWith('flashcards://')) { //added detection for type of tab to be rendered
     renderFlashcardsTab(fullPath);

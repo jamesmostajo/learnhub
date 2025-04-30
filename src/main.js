@@ -52,26 +52,3 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
-
-/// 📌 Study Timer Feature - Handles Study Mode Activation and Notifications
-// This section listens for events from the renderer process to start and stop the study session.
-// When the session starts, it can block distractions (e.g., notifications).
-// When the session ends, it sends a desktop notification to remind the user to take a break.
-
-const { ipcMain, Notification } = require('electron');
-
-ipcMain.on('study-session-start', () => {
-    console.log("📚 Study Mode Activated");
-    // TODO: Add logic to block distractions (e.g., mute notifications)
-});
-
-ipcMain.on('study-session-end', () => {
-    console.log("⏳ Study Session Ended");
-    new Notification({
-        title: "Break Time!",
-        body: "Your study session is over. Take a short break!"
-    }).show();
-});

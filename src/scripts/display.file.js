@@ -1,4 +1,4 @@
-import { createTab, switchToTab, tabState } from './routes.js';
+import { createTab, switchToTab, tabState, markTabAsActive } from './routes.js';
 
 const fs = require('fs');
 const path = require('path');
