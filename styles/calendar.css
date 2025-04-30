@@ -1,0 +1,78 @@
+.calendar-view {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    overflow-y: auto;
+}
+    .calendar-view .app-header {
+        background: #2a2a2a;
+        color: #e0e0e0;
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 1px solid #4a4a4a;
+    }
+    .calendar-view .calendar-section {
+        padding: 1rem;
+    }
+    .calendar-view .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .calendar-view .calendar-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .calendar-view .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.3rem;
+    }
+    .calendar-view .day {
+        background: #3a3a3a;
+        color: #e0e0e0;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+        .calendar-view .day.today {
+            background: #505050;
+            font-weight: bold;
+        }
+    .calendar-view .events-section {
+        margin-top: 2rem;
+    }
+    .calendar-view #events-list {
+        list-style: none;
+        margin: 1rem 0;
+    }
+        .calendar-view #events-list li {
+            padding: 0.5rem;
+            background: #3a3a3a;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+    .calendar-view .event-form {
+        margin-top: 1rem;
+    }
+
+    .calendar-view .form-group {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+        .calendar-view .form-group input {
+            flex: 1;
+            padding: 0.5rem;
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+            border-radius: 4px;
+        }

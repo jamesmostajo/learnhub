@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LearnHub</title>
+</head>
+<body>
+  <div class="container"> <!-- Start of Container -->
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Files</h2>
+        <button id="open-folder">Open Folder</button>
+        <button id="timer-btn">Timer</button>
+        <button id="flash-cards-btn">Flash Cards</button>
+        <button id="quiz-btn">Quiz</button>
+        <button id="toggle-ambient">Ambient Sound</button>
+        <button id="calendar-btn">Calendar</button>
+</div>
+      <ul class="file-list"></ul>
+    </div>
+
+    <!-- Main Pane -->
+    <div class="main-pane"> <!-- Start of Main Pane -->
+      <div class="file-view"> <!-- Start of File View -->
+        <div class="file-header">
+          <div id="file-tabs"></div>
+          <button id="save-button" hidden>Save</button>
+        </div>
+          <div id="window">
+            <pre id="file-content"></pre>
+          </div>
+        </div>
+      </div> <!-- End of File View -->
+    </div> <!-- End of Main Pane -->
+
+  </div> <!-- End of Container -->
+</body>
+</html>
