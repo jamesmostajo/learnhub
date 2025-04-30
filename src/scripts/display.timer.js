@@ -10,7 +10,17 @@ export function displayTimer() {
     // Attach event listeners to buttons
     startButton.addEventListener('click', startTimer);
     stopButton.addEventListener('click', stopTimer);
-    settingsButton.addEventListener('click', () => settingsDialog.showModal());
+    settingsButton.addEventListener('click', () => {
+        // Populate settings dialog with current timer settings
+        document.getElementById('pomodoro-time').value = formatTime(timerSettings.pomodoroTime);
+        document.getElementById('short-break').value = formatTime(timerSettings.shortBreakTime);
+        document.getElementById('long-break').value = formatTime(timerSettings.longBreakTime);
+        document.getElementById('auto-start-breaks').checked = timerSettings.autoStartBreaks;
+        document.getElementById('auto-start-pomodoros').checked = timerSettings.autoStartPomodoros;
+        document.getElementById('long-break-interval').value = timerSettings.longBreakInterval;
+
+        settingsDialog.showModal();
+    });
     closeButton.addEventListener('click', () => settingsDialog.close());
 
     const saveSettingsButton = document.getElementById('save-settings');
@@ -45,6 +55,12 @@ export function displayTimer() {
     function parseTimeInput(input) {
         const [minutes, seconds] = input.split(':').map(Number);
         return minutes * 60 + (seconds || 0);
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
     // Initialize the timer
