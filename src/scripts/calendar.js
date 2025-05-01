@@ -39,8 +39,9 @@ export function initializeCalendar() {
         }
 
         for (let day = 1; day <= lastDate; day++) {
+            const d = day;
             const dayCell = document.createElement('div');
-            const thisDate = new Date(year, month, day);
+            const thisDate = new Date(Date.UTC(year, month, d));
             const dateKey = formatDateKey(thisDate);
 
             dayCell.textContent = day;
