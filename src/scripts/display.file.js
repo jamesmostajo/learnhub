@@ -1,4 +1,4 @@
-import { createTab, switchToTab, tabState, markTabAsActive } from './routes.js';
+import { createTab, switchToTab, tabState, closeTab} from './routes.js';
 import { loadFolderContents } from './open.file';
 
 const fs = require('fs');
@@ -75,27 +75,22 @@ export function saveData() {
             console.error('Error saving file:', err);
             alert('Error saving file.');
           } else {
-            // Update the tab state and refresh the sidebar
+            // Refresh the sidebar
             const fileList = document.querySelector('.file-list');
             loadFolderContents(path.dirname(result.filePath), fileList);
 
-            // Update the tabState and tab name
+            // Close the old tab and create a new one
             const oldPath = fullPath;
             const newPath = result.filePath;
 
-            tabState[newPath] = { content: newData };
-            delete tabState[oldPath];
-
             const tabElement = document.querySelector(`#file-tabs .tab[data-path="${oldPath}"]`);
             if (tabElement) {
-              tabElement.dataset.path = newPath;
-              const nameSpan = tabElement.querySelector('.tab-name');
-              if (nameSpan) {
-                nameSpan.textContent = path.basename(newPath);
-              }
+              closeTab(oldPath, tabElement); // Close the old tab
             }
 
-            switchToTab(newPath);
+            createTab(newPath, newData); // Create a new tab with the correct path
+            switchToTab(newPath); // Switch to the new tab
+
             alert('File saved successfully.');
           }
         });
@@ -110,6 +105,8 @@ export function saveData() {
         console.error('Error saving file:', err);
         alert('Error saving file.');
       } else {
+        tabState[fullPath].content = newData; // Ensure tabState is updated
+        console.log('Updated tabState:', tabState); // Debugging log
         alert('File saved successfully.');
       }
     });

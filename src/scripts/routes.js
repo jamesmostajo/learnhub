@@ -87,7 +87,7 @@ function markTabAsActive(tabButton) {
   tabButton.classList.add('active');
 }
 
-function closeTab(fullPath, tabButton) {
+export function closeTab(fullPath, tabButton) {
   delete tabState[fullPath];
   tabButton.remove();
 
