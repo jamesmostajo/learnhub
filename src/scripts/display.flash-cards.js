@@ -5,16 +5,16 @@ export function displayFlashcards() {
   const flashcardPath = 'flashcards://Flash Cards';
 
   const flashcardHTML = `
-    <div id="flashcard-container" style="display: flex; flex-direction: column; align-items: center;">
-      <div id="flashcard" style="border: 1px solid #ccc; padding: 20px; margin: 10px;">
+    <div id="flashcard-container">
+      <div id="flashcard">
         <div id="flashcard-front" class="card-face">Question</div>
         <div id="flashcard-back" class="card-face" style="display:none;">Answer</div>
       </div>
 
-      <div id="flashcard-controls" style="margin-top: 10px;">
-        <button id="prev-card">Previous</button>
+      <div id="flashcard-controls">
+        <button id="prev-card">◀</button>
         <button id="flip-card">Flip</button>
-        <button id="next-card">Next</button>
+        <button id="next-card">▶</button>
       </div>
 
       <div id="flashcard-progress" style="margin-top: 10px;">Card 1 of X</div>

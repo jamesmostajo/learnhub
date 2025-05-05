@@ -1,7 +1,7 @@
 const flashcards = [
-  { id: "fc1", question: "What is the capital of France?", answer: "Paris" },
-  { id: "fc2", question: "What is the largest planet in the solar system?", answer: "Jupiter" },
-  { id: "fc3", question: "What is the formula for water?", answer: "H₂O" }
+  {question: "What is the capital of France?", answer: "Paris" },
+  {question: "What is the largest planet in the solar system?", answer: "Jupiter" },
+  {question: "What is the formula for water?", answer: "H₂O" }
 ];
 
 let currentIndex = 0;
@@ -58,5 +58,5 @@ function updateCardView() {
   front.style.display = showingFront ? 'block' : 'none';
   back.style.display = showingFront ? 'none' : 'block';
 
-  progress.textContent = `Card ${currentIndex + 1} of ${flashcards.length}`;
+  progress.textContent = `${currentIndex + 1} of ${flashcards.length}`;
 }
