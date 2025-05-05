@@ -17,7 +17,7 @@ export function displayFlashcards() {
         <button id="next-card">▶</button>
       </div>
 
-      <div id="flashcard-progress" style="margin-top: 10px;">Card 1 of X</div>
+      <div id="flashcard-progress">Card 1 of X</div>
     </div>
   `;
 
@@ -41,5 +41,5 @@ export function renderFlashcardsTab(fullPath) {
 
   windowEl.innerHTML = content;
 
-  initializeFlashcardControls(); // re-apply listeners after reloading all the shits
+  initializeFlashcardControls();
 }

@@ -5,16 +5,14 @@ export function displayQuiz() {
   const QuizPath = 'quizzes://Quiz';
 
   const QuizHTML = `
-    <div id="quiz-container" style="display: flex; flex-direction: column; align-items: center;">
-      <div id="quiz">
+    <div id="quiz-container">
         <h2 id="quiz-question">Question will appear here</h2>
-        <div id="quiz-options" style="margin-bottom: 10px;"></div>
+        <div id="quiz-options"></div>
         <div id="quiz-navigation" style="margin-top: 20px; text-align: center;">
-          <button id="quiz-prev" style="background-color:#6c757d;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;">Previous</button>
-          <button id="quiz-next" style="background-color:#007bff;color:white;padding:10px 20px;border:none;border-radius:8px;margin:5px;cursor:pointer;">Next</button>
+          <button id="quiz-prev">◀</button>
+          <button id="quiz-next">▶</button>
         </div>
         <div id="quiz-progress" style="margin-top: 10px;"></div>
-      </div>
     </div>
   `;
 
@@ -38,5 +36,5 @@ export function renderQuizTab(fullPath) {
 
   windowEl.innerHTML = content;
 
-  initializeQuizControls(); // reapply listeners after loading the shits
+  initializeQuizControls();
 }

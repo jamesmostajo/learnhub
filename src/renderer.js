@@ -35,12 +35,9 @@ import './styles/main-pane.css';
 import './styles/tabs.css';
 import './styles/timer.css';
 import './styles/flashcards.css';
+import './styles/quiz.css';
 import './styles/calendar.css';
 import './styles/ambient.css';
-
-import './scripts/flashcard.js';
-import './scripts/quiz.js';
-
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
