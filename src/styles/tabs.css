@@ -56,12 +56,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #222;
+  background-color: #4f4f4f;
   color: white;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  border: 1px solid #999;
+  border: 1px solid #373737;
   font-size: 18px;
   font-weight: bold;
 }
