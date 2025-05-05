@@ -1,0 +1,36 @@
+#home-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: x-large;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#todays-tasks {
+    height: 90%;
+    width: 50%;
+    background-color: #585858;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 3rem;
+    padding: 0rem 4rem 0rem 2rem;
+}
+
+#todays-tasks h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+#todays-tasks ul li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+    color: #e6e6e6;
+}
+
+.home{
+    flex-direction: column;
+    width: 50vw;
+}
