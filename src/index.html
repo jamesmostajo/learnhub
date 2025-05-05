@@ -8,15 +8,17 @@
 <body>
   <div class="container"> <!-- Start of Container -->
     <!-- Sidebar -->
-    <div class="sidebar">
+  <div class="sidebar">
+    <div class="sidebar-top">
       <div class="sidebar-header">
         <h2>Files</h2>
-        <button id="open-folder">Open Folder</button>
-        <button id="new-file">New File</button>
-        <button id="flash-cards-btn">Flash Cards</button>
-        <button id="quiz-btn">Quiz</button>
-        <button id="toggle-ambient">Ambient Sound</button>
-        <button id="calendar-btn">Calendar</button>
+        <button id="save-button" hidden>Save</button>
+      </div>
+      <button id="flash-cards-btn">Flash Cards</button>
+      <button id="quiz-btn">Quiz</button>
+      <button id="toggle-ambient">Ambient Sound</button>
+      <button id="calendar-btn">Calendar</button>
+      <button id="open-folder">Open Folder</button>
       </div>
       <ul class="file-list"></ul>
     </div>
@@ -26,8 +28,8 @@
       <div class="file-view"> <!-- Start of File View -->
         <div class="file-header">
           <div id="file-tabs"></div>
-            <button id="save-button" hidden>Save</button>
-          </div>
+          <button id="new-file">+</button>
+        </div>
           <div id="window">
             <pre id="file-content"></pre>
           </div>

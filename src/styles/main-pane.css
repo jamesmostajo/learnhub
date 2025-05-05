@@ -4,7 +4,6 @@
   height: 40px;
   line-height: 30px;
   display: flex;
-  justify-content: space-between;
 }
 
 #save-button {

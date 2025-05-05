@@ -16,6 +16,14 @@
   flex-shrink: 0;
 }
 
+.icons{
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  background-color: white;
+}
+
 .main-pane {
   flex: 1;
   padding: 20px;
