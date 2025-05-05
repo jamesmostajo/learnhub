@@ -2,11 +2,11 @@ export const tabState = {};
 let activeTabPath = null;
 
 import { renderFile } from './display.file.js';
-import { renderFlashcardsTab } from './display.flash-cards.js';  //function for displaying flashcards tab
-import { renderQuizTab } from './display.quiz.js'; //function for displaying quiz tab
-import { renderAmbientTab } from './display.ambient.js'; //function for displaying ambient tab
-import { renderCalendarTab } from './display.calendar.js'; //function for displaying ambient tab
-
+import { renderFlashcardsTab } from './display.flash-cards.js';
+import { renderQuizTab } from './display.quiz.js';
+import { renderAmbientTab } from './display.ambient.js';
+import { renderCalendarTab } from './display.calendar.js';
+import { renderHomePage } from './homepage.js'
 
 const path = require('path');
 export function createTab(fullPath, initialContent) {
@@ -99,14 +99,8 @@ export function closeTab(fullPath, tabButton) {
     switchToTab(firstPath);
     markTabAsActive(firstTab);
   } else {
-    showDefaultDisplay();
+    renderHomePage();
   }
-}
-
-function showDefaultDisplay() {
-  const windowEl = document.getElementById('window');
-  windowEl.innerHTML = '<pre id="file-content">No file open.</pre>';
-  document.getElementById('save-button')?.setAttribute('hidden', 'hidden');
 }
 
 export function createNewFile() {
