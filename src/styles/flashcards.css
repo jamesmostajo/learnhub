@@ -62,3 +62,13 @@ body {
   text-align: center;
   color: #ffffff;
 }
+
+#load-json {
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+}

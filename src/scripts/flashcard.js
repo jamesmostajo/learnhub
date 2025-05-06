@@ -1,7 +1,5 @@
-const flashcards = [
-  {question: "What is the capital of France?", answer: "Paris" },
-  {question: "What is the largest planet in the solar system?", answer: "Jupiter" },
-  {question: "What is the formula for water?", answer: "H₂O" }
+let flashcards = [
+  {question: "What is the powerhouse of the cell?", answer: "Mitochondria" }
 ];
 
 let currentIndex = 0;
@@ -42,6 +40,32 @@ export function initializeFlashcardControls() {
   });
 
   updateCardView();
+
+  document.getElementById('load-json').addEventListener('click', () => {
+    document.getElementById('json-loader').click();
+  });
+  
+  document.getElementById('json-loader').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      try {
+        const json = JSON.parse(event.target.result);
+  
+        if (Array.isArray(json) && json.every(card => 'question' in card && 'answer' in card)) {
+          setFlashcards(json);
+        } else {
+          alert("Invalid flashcard format. Each item should have 'question' and 'answer' fields.");
+        }
+      } catch (err) {
+        console.error("Error parsing JSON:", err);
+        alert("Failed to parse JSON file.");
+      }
+    };
+    reader.readAsText(file);
+  });
 }
 
 function updateCardView() {
@@ -59,4 +83,11 @@ function updateCardView() {
   back.style.display = showingFront ? 'none' : 'block';
 
   progress.textContent = `${currentIndex + 1} of ${flashcards.length}`;
+}
+
+export function setFlashcards(newCards) {
+  flashcards = newCards;
+  currentIndex = 0;
+  showingFront = true;
+  updateCardView();
 }

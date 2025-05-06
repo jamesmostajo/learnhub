@@ -13,6 +13,8 @@ export function displayQuiz() {
           <button id="quiz-next">▶</button>
         </div>
         <div id="quiz-progress" style="margin-top: 10px;"></div>
+        <input type="file" id="quiz-json-loader" accept=".json" hidden />
+        <button id="load-quiz-json">Load Quiz</button>
     </div>
   `;
 

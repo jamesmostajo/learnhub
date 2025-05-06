@@ -1,4 +1,4 @@
-const quizData = [
+let quizData = [
   {
     question: "What is the capital of France?",
     type: "multiple_choice",
@@ -57,6 +57,40 @@ export function initializeQuizControls() {
     }
   });
 
+  document.getElementById("load-quiz-json").addEventListener("click", () => {
+    document.getElementById("quiz-json-loader").click();
+  });
+
+  document.getElementById("quiz-json-loader").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      try {
+        const json = JSON.parse(event.target.result);
+
+        const isValid = Array.isArray(json) && json.every(q =>
+          typeof q.question === 'string' &&
+          Array.isArray(q.options) &&
+          typeof q.correct === 'string'
+        );
+
+        if (!isValid) {
+          alert("Invalid quiz format. Each question needs 'question', 'options' (array), and 'correct' fields.");
+          return;
+        }
+
+        setQuizData(json);
+      } catch (err) {
+        console.error("Error parsing quiz JSON:", err);
+        alert("Failed to parse quiz JSON file.");
+      }
+    };
+
+    reader.readAsText(file);
+  });
+
   renderQuiz();
 }
 
@@ -82,4 +116,10 @@ function renderQuiz() {
 
   document.getElementById("quiz-progress").textContent =
     `${currentQuizIndex + 1} of ${quizData.length}`;
+}
+
+export function setQuizData(newQuiz) {
+  quizData = newQuiz;
+  currentQuizIndex = 0;
+  renderQuiz();
 }

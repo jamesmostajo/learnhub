@@ -18,6 +18,8 @@ export function displayFlashcards() {
       </div>
 
       <div id="flashcard-progress">Card 1 of X</div>
+      <input type="file" id="json-loader" accept=".json" hidden>
+      <button id="load-json">Load Flashcards</button>
     </div>
   `;
 
