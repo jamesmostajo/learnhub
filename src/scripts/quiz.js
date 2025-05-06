@@ -32,6 +32,7 @@ let quizData = [
 ];
 
 let currentQuizIndex = 0;
+let isQuizTaking = true;
 
 // Exported function instead of window event!
 export function initializeQuizControls() {
@@ -89,6 +90,53 @@ export function initializeQuizControls() {
     };
 
     reader.readAsText(file);
+  });
+
+  const toggleBtn = document.getElementById("toggle-quiz-mode");
+  const takeSection = document.getElementById("quiz");
+  const createSection = document.getElementById("quiz-create");
+
+  toggleBtn.addEventListener("click", () => {
+    isQuizTaking = !isQuizTaking;
+    takeSection.style.display = isQuizTaking ? "block" : "none";
+    createSection.style.display = isQuizTaking ? "none" : "block";
+  });
+
+  const saveBtn = document.getElementById("save-quiz-question");
+  const statusEl = document.getElementById("quiz-create-status");
+
+  saveBtn.addEventListener("click", () => {
+    const question = document.getElementById("create-question").value.trim();
+    const options = [
+      document.getElementById("create-option1").value.trim(),
+      document.getElementById("create-option2").value.trim(),
+      document.getElementById("create-option3").value.trim(),
+      document.getElementById("create-option4").value.trim(),
+    ];
+  
+    const selectedRadio = document.querySelector("input[name='correct-answer']:checked");
+    if (!question || options.some(opt => !opt) || !selectedRadio) {
+      alert("Please fill out all fields and select the correct answer.");
+      return;
+    }
+  
+    const correctIndex = parseInt(selectedRadio.value) - 1;
+    const correct = options[correctIndex];
+  
+    quizData.push({
+      question,
+      type: "multiple_choice",
+      options,
+      correct
+    });
+  
+    document.getElementById("create-question").value = "";
+    options.forEach((_, i) => {
+      document.getElementById(`create-option${i + 1}`).value = "";
+    });
+    selectedRadio.checked = false;
+  
+    statusEl.textContent = `Saved! Total created: ${quizData.length}`;
   });
 
   renderQuiz();
