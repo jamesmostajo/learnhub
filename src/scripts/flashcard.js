@@ -1,10 +1,11 @@
+import { displayFlashcards } from "./display.flash-cards";
+
 let flashcards = [
-  {question: "What is the powerhouse of the cell?", answer: "Mitochondria" }
+  { question: "What is the powerhouse of the cell?", answer: "Mitochondria" }
 ];
 
 let currentIndex = 0;
 let showingFront = true;
-let editingFront = true;
 let isFlashcardView = true;
 
 export function initializeFlashcardControls() {
@@ -27,8 +28,7 @@ export function initializeFlashcardControls() {
       flashcardContainer.style.display = 'none';
       createFlashcardContainer.style.display = 'block';
     } else {
-      flashcardContainer.style.display = 'block';
-      createFlashcardContainer.style.display = 'none';
+      displayFlashcards();
     }
 
     isFlashcardView = !isFlashcardView;
@@ -60,16 +60,16 @@ export function initializeFlashcardControls() {
   document.getElementById('load-json').addEventListener('click', () => {
     document.getElementById('json-loader').click();
   });
-  
+
   document.getElementById('json-loader').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
-  
+
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       try {
         const json = JSON.parse(event.target.result);
-  
+
         if (Array.isArray(json) && json.every(card => 'question' in card && 'answer' in card)) {
           setFlashcards(json);
         } else {
