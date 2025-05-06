@@ -12,9 +12,9 @@ export function displayCalendar() {
       </header>
       <section class="calendar-section">
         <div class="calendar-header">
-          <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+          <button id="prev-month">◀</button>
           <h2 id="month-year"></h2>
-          <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+          <button id="next-month">▶</button>
         </div>
         <div class="calendar-weekdays">
           <div>Sun</div><div>Mon</div><div>Tue</div>
@@ -23,20 +23,21 @@ export function displayCalendar() {
         </div>
         <div class="calendar-days" id="calendar-days"></div>
       </section>
-      <section class="events-section">
-        <h3><span id="events-date">Today</span>'s Sessions</h3>
-        <ul id="events-list"></ul>
+      <div class="events-section">
+        <h2><span id="events-date">Today</span>'s Tasks</h2>
+        <div id="events-list"></div>
         <div class="event-form">
+          <h2>Add a New Task</h2>
           <div class="form-group">
             <input type="date" id="event-date">
             <input type="time" id="event-time">
           </div>
           <div class="form-group">
-            <input type="text" id="event-title" placeholder="Session name">
-            <button id="add-event">Add Session</button>
+            <input type="text" id="event-title" placeholder="Task Name">
+            <button id="add-event">+ Add</button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   `;
 
@@ -60,5 +61,5 @@ export function renderCalendarTab(fullPath) {
 
   windowEl.innerHTML = content;
 
-  initializeCalendar(); // re-apply listeners after reloading all the shits
+  initializeCalendar();
 }
