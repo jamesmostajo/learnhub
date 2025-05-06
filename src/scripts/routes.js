@@ -52,8 +52,9 @@ export function createTab(fullPath, initialContent) {
 export function switchToTab(fullPath) {
   saveActiveTabState();
   activeTabPath = fullPath;
-  
-  const fileTab = document.querySelector(`#file-tabs .tab[data-path="${fullPath}"]`);
+
+  const query = `#file-tabs .tab[data-path="${CSS.escape(fullPath)}"]`;
+  const fileTab = document.querySelector(query);
   if (fileTab) {
     markTabAsActive(fileTab);
   }
