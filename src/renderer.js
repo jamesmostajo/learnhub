@@ -50,7 +50,7 @@ import { displayQuiz } from './scripts/display.quiz.js';
 import { displayAmbient } from './scripts/display.ambient.js';
 import { displayCalendar } from './scripts/display.calendar.js';
 import { createNewFile } from './scripts/routes.js';
-import { renderHomePage } from './scripts/homepage.js';
+import { displayHomePage} from './scripts/homepage.js';
 
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
@@ -75,5 +75,5 @@ showCalendarBtn.addEventListener('click', displayCalendar);
 const newFileButton = document.getElementById('new-file');
 newFileButton.addEventListener('click', createNewFile);
 
-renderHomePage();
+displayHomePage();
 displayTimer();

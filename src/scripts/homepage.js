@@ -1,6 +1,16 @@
+import { createTab, switchToTab, tabState } from './routes.js';
 import { getTodaysEvents } from './calendar.js';
 
-export function renderHomePage() {
+export function displayHomePage() {
+  const HomePath = 'home://Home';
+  document.getElementById('save-button')?.setAttribute('hidden', 'hidden');
+  if (!tabState[HomePath]) {
+    createTab(HomePath, '');
+  }
+  switchToTab(HomePath);
+}
+
+export function renderHomePage(){
   const windowEl = document.getElementById('file-content');
   const todaysEvents = getTodaysEvents();
 
@@ -10,7 +20,7 @@ export function renderHomePage() {
         <li>${event.time} - ${event.title} (${event.status})</li>
       `).join('')}</ul>`;
 
-  windowEl.innerHTML = `
+  const HomeHTML = `
   <div class="to-center">
     <div class="to-center home">
       <div id="home-title">
@@ -24,6 +34,6 @@ export function renderHomePage() {
     </div>
   </div>
   `;
-
-  document.getElementById('save-button')?.setAttribute('hidden', 'hidden');
+  
+  windowEl.innerHTML = HomeHTML;
 }

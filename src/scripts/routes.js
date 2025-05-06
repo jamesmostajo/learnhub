@@ -6,7 +6,7 @@ import { renderFlashcardsTab } from './display.flash-cards.js';
 import { renderQuizTab } from './display.quiz.js';
 import { renderAmbientTab } from './display.ambient.js';
 import { renderCalendarTab } from './display.calendar.js';
-import { renderHomePage } from './homepage.js'
+import { displayHomePage, renderHomePage } from './homepage.js'
 
 const path = require('path');
 export function createTab(fullPath, initialContent) {
@@ -58,7 +58,9 @@ export function switchToTab(fullPath) {
     markTabAsActive(fileTab);
   }
 
-  if (fullPath.startsWith('flashcards://')) { //added detection for type of tab to be rendered
+  if (fullPath.startsWith('home://')) {
+    renderHomePage(fullPath);
+  } else if (fullPath.startsWith('flashcards://')) { //added detection for type of tab to be rendered
     renderFlashcardsTab(fullPath);
   } else if (fullPath.startsWith('quizzes://')) { //added detection for type of tab to be rendered
     renderQuizTab(fullPath);
@@ -99,7 +101,7 @@ export function closeTab(fullPath, tabButton) {
     switchToTab(firstPath);
     markTabAsActive(firstTab);
   } else {
-    renderHomePage();
+    displayHomePage();
   }
 }
 
