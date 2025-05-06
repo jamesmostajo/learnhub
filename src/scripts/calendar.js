@@ -122,7 +122,10 @@ function renderEvents() {
 function toggleEventDone(event) {
   const key = formatDateKey(selectedDate);
   const index = event.target.dataset.index;
-  events[key][index].done = event.target.checked;
+  events[key].splice(index, 1);
+  if (events[key].length === 0) {
+    delete events[key];
+  }
   saveEvents();
   renderEvents();
 }

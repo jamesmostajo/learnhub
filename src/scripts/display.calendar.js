@@ -12,9 +12,9 @@ export function displayCalendar() {
       </header>
       <section class="calendar-section">
         <div class="calendar-header">
-          <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+          <button id="prev-month">◀</button>
           <h2 id="month-year"></h2>
-          <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+          <button id="next-month">▶</button>
         </div>
         <div class="calendar-weekdays">
           <div>Sun</div><div>Mon</div><div>Tue</div>
@@ -60,5 +60,5 @@ export function renderCalendarTab(fullPath) {
 
   windowEl.innerHTML = content;
 
-  initializeCalendar(); // re-apply listeners after reloading all the shits
+  initializeCalendar();
 }
