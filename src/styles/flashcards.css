@@ -1,11 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #1e1e1e;
-  color: white;
-  margin: 0;
-  padding: 2em;
-}
-
 #flashcard-container { 
   display: flex;
   flex: 1;
@@ -35,14 +27,13 @@ body {
 }
 
 #flashcard-controls {
-  margin-top: 20px;
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 10px;
 }
 
-#flashcard-controls button {
+#flashcard-feature button {
   background-color: rgb(30, 136, 218);
   color: white;
   border: none;
@@ -53,7 +44,7 @@ body {
   cursor: pointer;
 }
 
-#flashcard-controls button:hover {
+#flashcard-feature button:hover {
   background-color: rgb(4, 93, 161);
 }
 
@@ -61,4 +52,48 @@ body {
   margin-top: 10px;
   text-align: center;
   color: #ffffff;
+}
+
+#flashcard-display,
+#create-flashcard-container {
+  transition: all 0.3s ease;
+}
+
+#create-flashcard-container {
+  display: none;
+}
+
+.flashcard-nav{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.other-controls{
+  margin: 10px 0px;
+}
+
+#toggle-view{
+  background-color: rgb(30, 136, 218);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+}
+
+#flashcard-feature {
+  position: relative; /* Ensure the parent container is positioned */
+  height: 60vh;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#create-flashcard{
+  display: flex;
+  justify-content: center;
 }

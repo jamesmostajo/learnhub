@@ -6,6 +6,7 @@
   height: 100%; /* Ensure it takes the full height of its parent */
   text-align: center;
   margin: 0 auto; /* Center horizontally if the container has a fixed width */
+  font-family: Arial, Helvetica, sans-serif;
 }
 #play-sound {
   width: 100%;
