@@ -52,6 +52,9 @@ import { displayCalendar } from './scripts/display.calendar.js';
 import { createNewFile } from './scripts/routes.js';
 import { displayHomePage} from './scripts/homepage.js';
 
+displayHomePage();
+displayTimer();
+
 const selectFolderButton = document.getElementById('open-folder');
 const fileList = document.querySelector('.file-list');
 
@@ -75,5 +78,5 @@ showCalendarBtn.addEventListener('click', displayCalendar);
 const newFileButton = document.getElementById('new-file');
 newFileButton.addEventListener('click', createNewFile);
 
-displayHomePage();
-displayTimer();
+const homeIcon = document.getElementById('home-icon');
+homeIcon.addEventListener('click', displayHomePage);
