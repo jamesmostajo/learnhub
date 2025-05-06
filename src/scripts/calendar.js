@@ -113,25 +113,35 @@ function renderEvents() {
     ? '<li>No sessions scheduled</li>'
     : sortedEvents.map((event, index) => `
       <li>
-        <input type="checkbox" ${event.done ? 'checked' : ''} data-index="${index}">
-        <span class="event-label ${event.done ? 'done' : ''}">
+        <select data-index="${index}" class="status-dropdown">
+          <option value="Not started" ${event.status === 'Not started' ? 'selected' : ''}>Not started</option>
+          <option value="In progress" ${event.status === 'In progress' ? 'selected' : ''}>In progress</option>
+          <option value="Completed" ${event.status === 'Completed' ? 'selected' : ''}>Completed</option>
+        </select>
+        <span class="event-label ${event.status === 'Completed' ? 'done' : ''}">
           ${event.time} - ${event.title}
         </span>
       </li>
     `).join('');
 
-  document.querySelectorAll('#events-list input').forEach(cb => {
-    cb.addEventListener('change', toggleEventDone);
+  document.querySelectorAll('.status-dropdown').forEach(dropdown => {
+    dropdown.addEventListener('change', toggleEventStatus);
   });
 }
 
-function toggleEventDone(event) {
+function toggleEventStatus(event) {
   const key = formatDateKey(selectedDate);
   const index = event.target.dataset.index;
-  events[key].splice(index, 1);
-  if (events[key].length === 0) {
-    delete events[key];
+  const newStatus = event.target.value;
+  events[key][index].status = newStatus;
+
+  if (newStatus === 'Completed') {
+    events[key].splice(index, 1);
+    if (events[key].length === 0) {
+      delete events[key];
+    }
   }
+
   saveEvents();
   renderEvents();
 }
@@ -148,7 +158,7 @@ function addEvent() {
   if (date && time && title) {
     const formattedDate = new Date(date).toLocaleDateString('en-CA');
     if (!events[formattedDate]) events[formattedDate] = [];
-    events[formattedDate].push({ time, title, done: false });
+    events[formattedDate].push({ time, title, status: 'Not started' }); // Default status
     saveEvents();
     renderEvents();
     renderCalendar(currentDate);
