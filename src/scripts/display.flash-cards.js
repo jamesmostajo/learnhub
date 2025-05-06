@@ -21,6 +21,22 @@ export function displayFlashcards() {
       <input type="file" id="json-loader" accept=".json" hidden>
       <button id="load-json">Load Flashcards</button>
     </div>
+
+    <div id="create-flashcard-container">
+      <div id="create-flashcard">
+        <textarea id="create-front" class="card-face" placeholder="Enter question here..."></textarea>
+        <textarea id="create-back" class="card-face" placeholder="Enter answer here..." style="display:none;"></textarea>
+      </div>
+
+      <div id="create-controls">
+        <button id="create-flip">Flip</button>
+        <button id="create-save">Save Flashcard</button>
+      </div>
+
+      <div id="create-status"></div>
+    </div>
+
+    <button id="toggle-view">Toggle Flashcard Maker/View</button>
   `;
 
   if (!tabState[flashcardPath]) {

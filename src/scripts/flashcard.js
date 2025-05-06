@@ -4,11 +4,15 @@ let flashcards = [
 
 let currentIndex = 0;
 let showingFront = true;
+let editingFront = true;
+let isFlashcardView = true;
 
 export function initializeFlashcardControls() {
   console.log("initializeFlashcardControls() loaded");
 
+  const toggleButton = document.getElementById('toggle-view');
   const flashcardContainer = document.getElementById('flashcard-container');
+  const createFlashcardContainer = document.getElementById('create-flashcard-container');
   const front = document.getElementById('flashcard-front');
   const back = document.getElementById('flashcard-back');
   const progress = document.getElementById('flashcard-progress');
@@ -17,6 +21,18 @@ export function initializeFlashcardControls() {
     console.error("Flashcards not found");
     return;
   }
+
+  toggleButton.addEventListener('click', () => {
+    if (isFlashcardView) {
+      flashcardContainer.style.display = 'none';
+      createFlashcardContainer.style.display = 'block';
+    } else {
+      flashcardContainer.style.display = 'block';
+      createFlashcardContainer.style.display = 'none';
+    }
+
+    isFlashcardView = !isFlashcardView;
+  });
 
   document.getElementById('flip-card').addEventListener('click', () => {
     showingFront = !showingFront;
@@ -65,6 +81,44 @@ export function initializeFlashcardControls() {
       }
     };
     reader.readAsText(file);
+  });
+
+  const flipBtn = document.getElementById('create-flip');
+  const saveBtn = document.getElementById('create-save');
+  const statusEl = document.getElementById('create-status');
+  const frontInput = document.getElementById('create-front');
+  const backInput = document.getElementById('create-back');
+  let editingFront = true;
+
+  if (!toggleButton || !flashcardContainer || !createFlashcardContainer) {
+    console.error("Required elements are missing");
+    return;
+  }
+
+  flipBtn.addEventListener('click', () => {
+    editingFront = !editingFront;
+    frontInput.style.display = editingFront ? 'block' : 'none';
+    backInput.style.display = editingFront ? 'none' : 'block';
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const question = frontInput.value.trim();
+    const answer = backInput.value.trim();
+
+    if (!question || !answer) {
+      alert('Both question and answer are required.');
+      return;
+    }
+
+    flashcards.push({ question, answer });
+
+    frontInput.value = '';
+    backInput.value = '';
+    editingFront = true;
+    frontInput.style.display = 'block';
+    backInput.style.display = 'none';
+
+    statusEl.textContent = `Saved! Total flashcards: ${flashcards.length}`;
   });
 }
 
