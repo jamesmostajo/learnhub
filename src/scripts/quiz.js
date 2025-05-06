@@ -139,6 +139,17 @@ export function initializeQuizControls() {
     statusEl.textContent = `Saved! Total created: ${quizData.length}`;
   });
 
+  document.getElementById("download-quiz-json").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(quizData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "my-quiz.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  
   renderQuiz();
 }
 

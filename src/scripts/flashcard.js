@@ -120,6 +120,16 @@ export function initializeFlashcardControls() {
 
     statusEl.textContent = `Saved! Total flashcards: ${flashcards.length}`;
   });
+
+  document.getElementById("download-fc-json").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(flashcards, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "my-flashcards.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
 }
 
 function updateCardView() {

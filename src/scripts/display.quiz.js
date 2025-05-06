@@ -40,6 +40,7 @@ export function displayQuiz() {
       </div>
       <input type="file" id="quiz-json-loader" accept=".json" hidden />
       <button id="load-quiz-json">Load Quiz</button>
+      <button id="download-quiz-json">Download Quiz</button>
       <button id="toggle-quiz-mode">Switch Mode</button>
     </div>
   `;
