@@ -24,7 +24,7 @@ export function displayCalendar() {
         <div class="calendar-days" id="calendar-days"></div>
       </section>
       <div class="events-section">
-        <h3><span id="events-date">Today</span>'s Sessions</h3>
+        <h2><span id="events-date">Today</span>'s Tasks</h2>
         <div id="events-list"></div>
         <div class="event-form">
           <h2>Add a New Task</h2>
