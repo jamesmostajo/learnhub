@@ -77,7 +77,14 @@ function createDayCell(year, month, day) {
   if (thisDate.toLocaleDateString('en-CA') === selectedDate.toLocaleDateString('en-CA')) {
     dayCell.classList.add('selected');
   }
-  if (events[dateKey]?.length > 0) dayCell.classList.add('has-event');
+  
+  if (events[dateKey]?.length > 0){
+    dayCell.classList.add('has-event');
+
+    const eventIndicator = document.createElement('div');
+    eventIndicator.classList.add('event-indicator');
+    dayCell.appendChild(eventIndicator);
+  } 
 
   dayCell.addEventListener('click', () => {
     selectedDate = thisDate;
@@ -109,24 +116,36 @@ function renderEvents() {
     return timeA - timeB;
   });
 
-  eventsList.innerHTML = sortedEvents.length === 0
-    ? '<li>No sessions scheduled</li>'
-    : sortedEvents.map((event, index) => `
-      <li>
-        <select data-index="${index}" class="status-dropdown">
-          <option value="Not started" ${event.status === 'Not started' ? 'selected' : ''}>Not started</option>
-          <option value="In progress" ${event.status === 'In progress' ? 'selected' : ''}>In progress</option>
-          <option value="Completed" ${event.status === 'Completed' ? 'selected' : ''}>Completed</option>
-        </select>
-        <span class="event-label ${event.status === 'Completed' ? 'done' : ''}">
-          ${event.time} - ${event.title}
-        </span>
-      </li>
-    `).join('');
-
-  document.querySelectorAll('.status-dropdown').forEach(dropdown => {
-    dropdown.addEventListener('change', toggleEventStatus);
+  eventsList.innerHTML = sortedEvents.length === 0? 
+  `<div class="task no-sessions">
+      <div class="task-name">No sessions scheduled</div>
+  </div>`
+  : sortedEvents.map((event, index) => `
+    <div class="task">
+      <div class="task-name">${event.status === 'Completed' ? 'done' : ''} ${event.time} - ${event.title}</div>
+      <select data-index="${index}" class="status-dropdown">
+        <option value="Not started" ${event.status === 'Not started' ? 'selected' : ''}>Not started</option>
+        <option value="In progress" ${event.status === 'In progress' ? 'selected' : ''}>In progress</option>
+        <option value="Completed" ${event.status === 'Completed' ? 'selected' : ''}>Completed</option>
+      </select>
+    </div>
+  `).join('');
+    document.querySelectorAll('.status-dropdown').forEach(dropdown => {
+      updateDropdownColor(dropdown);
+      dropdown.addEventListener('change', toggleEventStatus);
   });
+}
+
+function updateDropdownColor(dropdown) {
+  const value = dropdown.value;
+
+  if (value === 'Not started') {
+    dropdown.style.backgroundColor = 'rgb(176, 0, 0)';
+  } else if (value === 'In progress') {
+    dropdown.style.backgroundColor = 'rgb(30, 136, 218)'; 
+  } else {
+    dropdown.style.backgroundColor = '';
+  }
 }
 
 function toggleEventStatus(event) {

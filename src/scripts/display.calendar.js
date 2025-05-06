@@ -23,20 +23,21 @@ export function displayCalendar() {
         </div>
         <div class="calendar-days" id="calendar-days"></div>
       </section>
-      <section class="events-section">
+      <div class="events-section">
         <h3><span id="events-date">Today</span>'s Sessions</h3>
-        <ul id="events-list"></ul>
+        <div id="events-list"></div>
         <div class="event-form">
+          <h2>Add a New Task</h2>
           <div class="form-group">
             <input type="date" id="event-date">
             <input type="time" id="event-time">
           </div>
           <div class="form-group">
-            <input type="text" id="event-title" placeholder="Session name">
-            <button id="add-event">Add Session</button>
+            <input type="text" id="event-title" placeholder="Task Name">
+            <button id="add-event">+ Add</button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   `;
 
