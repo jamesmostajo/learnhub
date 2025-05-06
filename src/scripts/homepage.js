@@ -7,7 +7,7 @@ export function renderHomePage() {
   const eventsHTML = todaysEvents.length === 0
     ? '<p>No tasks scheduled for today.</p>'
     : `<ul>${todaysEvents.map(event => `
-        <li>${event.time} - ${event.title}</li>
+        <li>${event.time} - ${event.title} (${event.status})</li>
       `).join('')}</ul>`;
 
   windowEl.innerHTML = `
