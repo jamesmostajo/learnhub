@@ -67,7 +67,7 @@ export function initializeQuizControls() {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       try {
         const json = JSON.parse(event.target.result);
 
@@ -100,6 +100,15 @@ export function initializeQuizControls() {
     isQuizTaking = !isQuizTaking;
     takeSection.style.display = isQuizTaking ? "block" : "none";
     createSection.style.display = isQuizTaking ? "none" : "block";
+    const quizPrv = document.getElementById('quiz-prev');
+    const quizNxt = document.getElementById('quiz-next');
+    if (isQuizTaking) {
+      quizPrv.removeAttribute('hidden');
+      quizNxt.removeAttribute('hidden');
+    } else {
+      quizPrv.setAttribute('hidden', 'hidden');
+      quizNxt.setAttribute('hidden', 'hidden');
+    }
   });
 
   const saveBtn = document.getElementById("save-quiz-question");
@@ -113,29 +122,29 @@ export function initializeQuizControls() {
       document.getElementById("create-option3").value.trim(),
       document.getElementById("create-option4").value.trim(),
     ];
-  
+
     const selectedRadio = document.querySelector("input[name='correct-answer']:checked");
     if (!question || options.some(opt => !opt) || !selectedRadio) {
       alert("Please fill out all fields and select the correct answer.");
       return;
     }
-  
+
     const correctIndex = parseInt(selectedRadio.value) - 1;
     const correct = options[correctIndex];
-  
+
     quizData.push({
       question,
       type: "multiple_choice",
       options,
       correct
     });
-  
+
     document.getElementById("create-question").value = "";
     options.forEach((_, i) => {
       document.getElementById(`create-option${i + 1}`).value = "";
     });
     selectedRadio.checked = false;
-  
+
     statusEl.textContent = `Saved! Total created: ${quizData.length}`;
   });
 
@@ -149,7 +158,7 @@ export function initializeQuizControls() {
     URL.revokeObjectURL(url);
   });
 
-  
+
   renderQuiz();
 }
 
