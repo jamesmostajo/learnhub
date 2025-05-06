@@ -103,9 +103,15 @@ function renderEvents() {
   });
 
   const dateEvents = events[key] || [];
-  eventsList.innerHTML = dateEvents.length === 0
+  const sortedEvents = dateEvents.sort((a, b) => {
+    const timeA = new Date(`1970-01-01T${a.time}:00`);
+    const timeB = new Date(`1970-01-01T${b.time}:00`);
+    return timeA - timeB;
+  });
+
+  eventsList.innerHTML = sortedEvents.length === 0
     ? '<li>No sessions scheduled</li>'
-    : dateEvents.map((event, index) => `
+    : sortedEvents.map((event, index) => `
       <li>
         <input type="checkbox" ${event.done ? 'checked' : ''} data-index="${index}">
         <span class="event-label ${event.done ? 'done' : ''}">
@@ -157,5 +163,11 @@ function saveEvents() {
 
 export function getTodaysEvents() {
   const todayKey = new Date().toLocaleDateString('en-CA');
-  return events[todayKey] || [];
+  const nonSortedEvents = events[todayKey] || [];
+  const sortedEvents = nonSortedEvents.sort((a, b) => {
+    const timeA = new Date(`1970-01-01T${a.time}:00`);
+    const timeB = new Date(`1970-01-01T${b.time}:00`);
+    return timeA - timeB;
+  });
+  return sortedEvents;
 }
